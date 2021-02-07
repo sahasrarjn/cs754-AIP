@@ -26,14 +26,6 @@
 
 
 
-1. 
-2. 
-3. Since C1, C2 are increasing functions of $\delta_{2s}$, 0.3 bound will make them smaller and thus 
-   better approximation of  theta
-4. ==??==
-
-
-
 ## 2
 
 - RMSE for T=5 (flames) is 0.033017
@@ -45,24 +37,8 @@
 
 
 
-### 3
-
-Q3 mei the range must [1,√n]
-
-### 4
-
-1. This will be simple lin algebra, If we know the $\Phi$ and $y$, we can directly check which column of $\Phi$ is the scaled y.
-2. 
-
-
-
-
-
-
-
 ### 6
 
 - [Compressed Sensing and Electron Microscopy - Peter Binev, Wolfgang Dahmen, Ronald DeVore, Philipp Lamby, Daniel Savu, and Robert Sharpley ∗](https://www.math.tamu.edu/~rdevore/publications/146.pdf)
 
-- 
-- 
+  
