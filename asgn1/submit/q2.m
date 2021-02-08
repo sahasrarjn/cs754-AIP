@@ -59,6 +59,8 @@ for i=1:H-7
     end
 end
 
+save('data.mat')
+
 wid = T*100;
 
 figure('Position', [50 50 300 wid])
