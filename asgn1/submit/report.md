@@ -59,7 +59,7 @@
 
 ### Flames.avi (T=5)
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/coded_snapshot_flames.png" style="zoom:33%;" />
+<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/coded_snapshot_flame.png" style="zoom:33%;" />
 
 ![](/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/reconstruction_flames.png)
 

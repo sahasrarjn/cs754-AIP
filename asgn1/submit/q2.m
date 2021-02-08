@@ -16,7 +16,7 @@ C = double(randi([0,1],[H,W,T]));
 Ft = zeros(H,W,T);
 CSnaps = zeros(H,W,T);
 
-I = zeros([H,W]);
+I = double(zeros([H,W]));
 for i = 1:T
     Ft(:,:,i) = rgb2gray(F(:,:,:,i));
     CSnaps(:,:,i) = Ft(:,:,i).*C(:,:,i);
@@ -24,7 +24,7 @@ for i = 1:T
 end
 
 I = I + 2*randn(H,W);
-imshow(cast(I,'uint8'));
+imshow(I/max(max(I)));
 title('Coded Snapshot with noise');
 saveas(gcf,'coded_snapshot.png', 'png');
 
