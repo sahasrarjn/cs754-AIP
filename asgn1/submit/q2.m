@@ -47,12 +47,10 @@ for i=1:H-7
         
         patch = I(i:i+7,j:j+7);
         b = reshape(patch', 64, 1);
-        theta = psi*omp(A,b,epsilon);
+        theta = psi*omp(A,b,epsilon); % This is 64*T x 1 matrix
         
         for t=1:T
-            l = 64*(t-1)+1;
-            h = 64*t;
-            tempTheta = reshape(theta(l:h,:),8,8);
+            tempTheta = reshape(theta(64*(t-1)+1:64*t,:),8,8);
             recons(i:i+7, j:j+7, t) = recons(i:i+7, j:j+7, t) + tempTheta';
             cnt(i:i+7, j:j+7, t) = cnt(i:i+7, j:j+7, t) + ones(8,8); % Sum (required for taking avg later)
         end
