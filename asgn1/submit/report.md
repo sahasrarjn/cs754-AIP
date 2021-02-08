@@ -170,6 +170,8 @@ $$
 $$
 If these 4 $\bf V_i$s are not linearly independent then there would be $\alpha_i$s other than zeros which satisfies this equation (which means we can't uniquely estimate x) so we have to make sure these are linearly independent to obtain a unique x. But as $\bf V_i \space \epsilon \space \R^3$ so any 3 independent $\bf V_i$s can represent any vector in $\R^3$ which means 4 such vectors can never be linearly independent.
 
+A special instance of $\Phi$ exists for which this problem doesn't arise, that is, when it doesn't have 4 vectors, i.e., we resort to $\Phi: 2\times3$ and the three columns are linearly independent. In short we want $n=3,$ and at this instance of $\Phi$ can uniquely determine $\mathbf{x}$ as now $\max(||\mathbf{x-x^{'}}||_0)=3$.
+
 **d)** The same problem doesn't arise for m=4, so our matrix should be such that any 4 columns of $\Phi$ are linearly independent.
 
 > Algorithm: Check for all combinations of i,j $\epsilon$ [n] and i<j. Such that y can be represented as a linear combination of $\bf V_i$ and $\bf V_j$ if it is possible then $x_i$ = coefficient of $\bf V_i$, $x_j$ = coefficient of $\bf V_j$  and rest of the elements of $\bf x$ are zero. The $\bf x$ obtained will be unique due to our choice of $\Phi$.
@@ -242,7 +244,7 @@ $$
 
 ## 6
 
-​	**a)**  
+**a)**  
 
 ​	**High-speed flow microscopy using compressed sensing with ultrafast laser pulses**
 
@@ -252,7 +254,7 @@ $$
 
 ​	 [Link to the paper](https://www.osapublishing.org/DirectPDFAccess/80AC8CA0-1D78-41B6-B9F74A3560AC34BC_315340/oe-23-8-10521.pdf?da=1&id=315340&seq=0&mobile=no)
 
-​	**b)** 
+**b)** 
 
 ​	The principle of operation of the CHiRP-CS imaging system is to modulate pseudorandom patterns at an ultrahigh rate onto the optical spectra of broadband mode-locked laser pulses and then utilize these spectral patterns to create structured illumination of an object.
 
