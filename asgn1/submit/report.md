@@ -67,7 +67,7 @@
 
 <img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/coded_snapshot7.png" style="zoom:33%;" />
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/reconstruction7_1.png" style="zoom:55%;" />
+<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/reconstruction7_1.png" style="zoom:60%;" />
 
 <img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/reconstruction7_2.png" style="zoom:70%;" />
 
@@ -75,9 +75,40 @@
 
 
 
-**c)**
+**c)** 
+
+We used the equation provided in the question to get an another equation **Ax = b** 
+$$
+E_u = \Sigma_{t=1}^T C_t \cdot F_t
+$$
+E is the coded image ($I$ for our matlab code). We divided it into 8 x 8 x T patches.
+
+For each patch of 8 x 8, we define:
+
+- $E^{i,j}$ be the patch of size 8 x 8 x T with top left corner at $i,j$. 
+- $F^{i,j} = (\psi \otimes \psi) * \theta$, where $\theta$ is sparse.  
+- $C^{i,j}$ be the patch from the binary code $C_t$ with  top left corner at $i,j$. 
+
+$$
+E^{i,j} = \Sigma_{t=1}^T F^{i,j}_t \cdot C^{i,j}_t
+$$
+
+Now, we can represent this as **Ax = b** form:
+
+- $b = E_{i,j}$ 
+- $A = [diag(C^{i,j}_1)\ diag(C^{i,j}_2)\ diag(C^{i,j}_3)] \times (I_{3} \otimes \psi \otimes \psi)$ 								...... for T = 3
+  - $I_3$ will combine all the matrices to generate a single matrix which can process all the frames of a patch in a single run
+  - $\psi \otimes \psi$ will take our $\theta$ vector the the 2d-DCT basis
+
+
 
 **d)**
+
+- Consider $y = \Phi f + \eta = \Phi \Psi \theta + \eta$
+- If for each i = 1 to m, $\eta_i$ is $N(0,\sigma^2)$, with known $\sigma$.
+- The squared magnitude of the vector $\eta$ is a chi-square random variable.
+- Hence with very high probability, the magnitude of $\eta$ will lie within 3 SD from the mean, i.e. $\epsilon \geq 9 m \sigma^2$.
+- Therefore, we set $\epsilon \geq 3*2*8*8 = 384$ ==doubt==
 
 
 
