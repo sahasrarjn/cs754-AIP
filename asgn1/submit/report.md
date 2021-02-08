@@ -252,7 +252,7 @@ $$
 
 ​	&copy; OSA 2015	20 Apr 2015 | Vol. 23, No. 8 | DOI:10.1364/OE.23.010521 | OPTICS EXPRESS 10531 
 
-​	 [Link to the paper](https://www.osapublishing.org/DirectPDFAccess/80AC8CA0-1D78-41B6-B9F74A3560AC34BC_315340/oe-23-8-10521.pdf?da=1&id=315340&seq=0&mobile=no)
+​	 [Link to the paper](https://www.osapublishing.org/oe/fulltext.cfm?uri=oe-23-8-10521&id=315340)
 
 **b)** 
 
