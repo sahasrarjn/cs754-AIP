@@ -108,7 +108,7 @@ Now, we can represent this as **Ax = b** form:
 - If for each i = 1 to m, $\eta_i$ is $N(0,\sigma^2)$, with known $\sigma$.
 - The squared magnitude of the vector $\eta$ is a chi-square random variable.
 - Hence with very high probability, the magnitude of $\eta$ will lie within 3 SD from the mean, i.e. $\epsilon \geq 9 m \sigma^2$.
-- Therefore, we set $\epsilon \geq 3*2*8*8 = 384$ ==doubt==
+- Therefore, we set $\epsilon \geq 9*64*2*2 = 2304$.
 
 
 

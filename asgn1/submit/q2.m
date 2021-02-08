@@ -4,7 +4,7 @@ tic;
 
 % To run change T, videofile accordingly
 
-T = 5;
+T = 3;
 [video, ~] = mmread('../cars.avi', 1:T);
 
 H = video.height;
@@ -28,14 +28,12 @@ imshow(cast(I,'uint8'));
 title('Coded Snapshot with noise');
 saveas(gcf,'coded_snapshot.png', 'png');
 
-epsilon = 48;
+epsilon = 2304; % m=64, sigma=2, epsilon >= 9 * 64 * 2 * 2 = 2304
 D = dctmtx(8);
 DD = kron(D,D)';
 psi = kron(eye(T),DD);
 recons = zeros(H,W,T);
 cnt = zeros(H,W,T);
-
-toc
 
 for i=1:H-7
     i %#ok<NOPTS>
@@ -66,6 +64,7 @@ wid = T*100;
 figure('Position', [50 50 300 wid])
 
 final = recons./cnt;
+toc
 for i=1:T
     subplot(T,3,3*i-2);
     imshow(cast(CSnaps(:,:,i),'uint8'));
