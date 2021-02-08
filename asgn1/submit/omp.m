@@ -6,7 +6,7 @@ function theta = omp(A,b,epsilon)
     i = 0;
     A_nor =  normc(A);
     
-    while (norm(r)>epsilon && i<64)
+    while norm(r)*norm(r)>epsilon
         [~, idx] = max(abs(r'*A_nor));
         T = [T idx];
         i = i + 1;
