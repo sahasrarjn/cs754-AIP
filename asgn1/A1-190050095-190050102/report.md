@@ -62,29 +62,29 @@
 
 ### Cars.avi (T=3)
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/coded_snapshot3.png" style="zoom:35%;" />
+<img src="images/coded_snapshot3.png" style="zoom:35%;" />
 
-![](/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/reconstruction3.png)
+![](images/reconstruction3.png)
 
 ### Cars.avi (T=5)
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/coded_snapshot5.png" style="zoom:33%;" />
+<img src="images/coded_snapshot5.png" style="zoom:33%;" />
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/reconstruction5.png" style="zoom:120%;" />
+<img src="images/reconstruction5.png" style="zoom:120%;" />
 
 ### Flames.avi (T=5)
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/coded_snapshot_flame.png" style="zoom:33%;" />
+<img src="images/coded_snapshot_flame.png" style="zoom:33%;" />
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/reconstruction_flame.png" style="zoom: 70%;" />
+<img src="images/reconstruction_flame.png" style="zoom: 70%;" />
 
 ### Cars.avi (T=7)
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/coded_snapshot7.png" style="zoom:33%;" />
+<img src="images/coded_snapshot7.png" style="zoom:33%;" />
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/reconstruction7_1.png" style="zoom:60%;" />
+<img src="images/reconstruction7_1.png" style="zoom:60%;" />
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/reconstruction7_2.png" style="zoom:70%;" />
+<img src="images/reconstruction7_2.png" style="zoom:70%;" />
 
 
 
@@ -310,6 +310,8 @@ $$
 ​	Light collected from the object is directed onto a single-pixel high-speed photodetector and the energy of each returned laser pulse in recorded continuously by a synchronized real-time ADC (Analog-to-Digital Converter).
 
 ​	Spectral patterning is accomplished using chirp processing in optical fiber. A passively mode-locked erbium-doped fiber laser is used in conjunction with a fiber amplifier. Dispersive spectrum-to-time mapping is then performed in a dispersion compensating fiber. Pattern modulation is achieved with a pulse pattern generator.
+
+<img src="images/chirp_hardware.png" style="zoom:70%;" />
 
 ​	Broadband laser pulses are dispersed in optical fiber to accomplish spectrum-to-time mapping. Each pulse is modulated with a unique ultrahigh-rate pseudorandom binary pattern and then re-compressed in fiber (Dispersion compensation) to an ultrashort duration before passing through a 1D wavelength-to-space mapping diffraction grating and lens that focuses the spectral pattern onto the object plane, providing structured illumination of the object flow. The output pulse energy traveling back through the spatial disperser to the photodiode and ADC represents an optically-computed inner product between the pseudorandom pattern and the object. The image is reconstructed via a sparsity-driven optimization from sub-Nyquist compressive measurements.
 
