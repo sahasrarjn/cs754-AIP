@@ -85,4 +85,5 @@ end
 saveas(gcf,'reconstruction.png', 'png');
 
 rmse = rssq(rssq(rssq(final-Ft)))/rssq(rssq(rssq(Ft)));
-fprintf('RMSE for T=%s is %s\n', num2str(T), num2str(rmse));
+mse = rmse^2;
+fprintf('Relative MSE for T=%s is %s\n', num2str(T), num2str(mse));
