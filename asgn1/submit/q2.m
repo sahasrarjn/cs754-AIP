@@ -1,8 +1,8 @@
-clc; clear; close();
+clc; close; clear;
 addpath('MMread');
 tic;
 
-% To run change T, videofile accordingly
+% To run change T, video file accordingly
 
 T = 5;
 [video, ~] = mmread('../cars.avi', 1:T);
@@ -13,8 +13,11 @@ WW = video.width;
 H = 120;
 W = 240;
 
-v = VideoReader('../cars.avi');
-F = read(v,[1,T]);
+F = cast(zeros([HH,WW,3,T]), 'uint8');
+
+for i=1:T
+    F(:,:,:,i) = video.frames(i).cdata;
+end
 
 C = double(randi([0,1],[H,W,T]));
 Ft = zeros(H,W,T);
