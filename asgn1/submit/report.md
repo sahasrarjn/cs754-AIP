@@ -266,7 +266,7 @@ $f,f_e \space \epsilon \space \real^{\sqrt{N}\times\sqrt{N}\times N_F}$ ; $f$ is
 
 We have flattened out $f$ as a column vector so $f,f_e: NN_F\times 1$
 
-$T \space \epsilon \space  \real^{\sqrt{N}\times\sqrt{N}\times N_F}$ is our time varying spatial transmission pattern which uniquely codes each of the $N_F$ temporal channels of $f$ prior to integrating into one detector image $g \space \epsilon \space  \real^{\sqrt{N}\times\sqrt{N}}$ during acquisition.
+$\mathbf{T} \space \epsilon \space  \real^{\sqrt{N}\times\sqrt{N}\times N_F}$ is our time varying spatial transmission pattern which uniquely codes each of the $N_F$ temporal channels of $f$ prior to integrating into one detector image $\mathbf{g} \space \epsilon \space  \real^{\sqrt{N}\times\sqrt{N}}$ during acquisition.
 
 $g$ is our detector image which is measured as
 $$
@@ -287,7 +287,7 @@ $$
 \mathbf{H_k} := diag[T_{1,1,k} \space T_{2,1,k} \space ... \space T_{\sqrt{N},\sqrt{N},k}], \space k = 1,...,N_F;\\
 \mathbf{H} := [\mathbf{H_1} \space \mathbf{H_2} \space ... \space \mathbf{H_{N_F}}],
 $$
- where $\mathbf{H_k} \space \epsilon \space \real^{N\times N}$ is a matrix containing the entries of $\bf T_k$ along its diagonals and $\mathbf{H} $ is a concatenation of all $\mathbf{H_k},k\space\epsilon\space [N_F]$.
+ where $\mathbf{H_k} \space \epsilon \space \real^{N\times N}$ is a matrix containing the entries of $\bf T_k$, binary matrix for coding $k^{th}$ temporal channel,  along its diagonals and $\mathbf{H} $ is a concatenation of all $\mathbf{H_k},k\space\epsilon\space [N_F]$.
 
 
 
