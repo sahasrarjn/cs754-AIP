@@ -111,9 +111,8 @@ $$
 Now, we can represent this as **Ax = b** form:
 
 - $b = E^{i,j}$ 
-- $A = [diag(C^{i,j}_1)\ diag(C^{i,j}_2)\ diag(C^{i,j}_3)] \times (I_{3} \otimes \psi \otimes \psi)$ 								...... for T = 3
-  - $I_3$ will combine all the matrices to generate a single matrix which can process all the frames of a patch in a single run
-  - $\psi \otimes \psi$ will take our $\theta$ vector to the 2d-DCT basis
+- $A = [diag(C^{i,j}_1)\ diag(C^{i,j}_2)\ diag(C^{i,j}_3)]$ 								...... for T = 3
+- **x** is the vectorised form of video
 
 
 
