@@ -49,11 +49,11 @@
 - There are two files:
   - **q2.m**: Contains most the code for this question
   - **omp.m**: Contains the implementation of OMP algorithm
-- For T=3,5. We run the algorithm for full image (on matlab online both took around 3-5 minutes)
+- For T=3,5. We run the algorithm for full image (on matlab online both took around 3 minutes)
 - For T=7(cars) and T=5(flame). We run the algorithm for 240 x 120 patch (took around 2-4 minutes)
 - Uploaded code reads 240 x 120 patch 
 - T = (on line 7)
-- For changing the video, change video file name on line 8,16
+- For changing the video, change video file name on line 8
 - To run the code, you can either type q2 or press run
 
 
@@ -211,7 +211,7 @@ $$
 $$
 Suppose we have an $x^{'}$ which also satisfies this equation. So $\bf \Phi(x-x^{'})=0$.
 
-We know $\max(||\mathbf{x-x^{'}}||_0)=4$  .
+We know $\max(||\mathbf{x-x^{'}}||_0)=4$ .
 $$
 \bf \Phi(x-x^{'}) = \sum_i \alpha_iV_i
 $$
