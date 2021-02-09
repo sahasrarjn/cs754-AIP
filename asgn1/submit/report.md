@@ -39,11 +39,26 @@
    - To get a better reconstruction, we must choose $\epsilon > \kappa$ where, $||\eta||_2^2 \leq \kappa$. And $\eta$ has non-zero magnitude therefore choosing $\epsilon=0$ will give poor reconstruction result
    - If we take $\epsilon=0$, reconstruction algorithms will take more time to converge (or might even fail to converge).
 
-   ==TD==
 
 
 
 ## 2
+
+#### Usage instructions:
+
+- There are two files:
+  - **q2.m**: Contains most the code for this question
+  - **omp.m**: Contains the implementation of OMP algorithm
+- For T=3,5. We run the algorithm for full image (on matlab online both took around 3-5 minutes)
+- For T=7(cars) and T=5(flame). We run the algorithm for 240 x 120 patch (took around 2-4 minutes)
+- Uploaded code reads 240 x 120 patch 
+- T = (on line 7)
+- For changing the video, change video file name on line 8,16
+- To run the code, you can either type q2 or press run
+
+
+
+- All these images are included in the images folder
 
 ### Cars.avi (T=3)
 
@@ -61,7 +76,7 @@
 
 <img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/coded_snapshot_flame.png" style="zoom:33%;" />
 
-![](/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/reconstruction_flames.png)
+<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/asgn1/submit/images/reconstruction_flame.png" style="zoom: 70%;" />
 
 ### Cars.avi (T=7)
 
@@ -95,7 +110,7 @@ $$
 
 Now, we can represent this as **Ax = b** form:
 
-- $b = E_{i,j}$ 
+- $b = E^{i,j}$ 
 - $A = [diag(C^{i,j}_1)\ diag(C^{i,j}_2)\ diag(C^{i,j}_3)] \times (I_{3} \otimes \psi \otimes \psi)$ 								...... for T = 3
   - $I_3$ will combine all the matrices to generate a single matrix which can process all the frames of a patch in a single run
   - $\psi \otimes \psi$ will take our $\theta$ vector to the 2d-DCT basis
@@ -114,10 +129,12 @@ Now, we can represent this as **Ax = b** form:
 
 **e)** Root mean squared error between reconstructed and original data:
 
-- RMSE for T=5 (flames) is 0.033017
+- RMSE for T=5 (flames) is 0.033017 
 - RMSE for T=3 (cars)  is 0.11745
 - RMSE for T=5 (cars) is 0.15479
 - RMSE for T=7 (cars) is 0.19776
+
+These data are for full image reconstruction.
 
 
 
