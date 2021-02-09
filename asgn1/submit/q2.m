@@ -4,21 +4,25 @@ tic;
 
 % To run change T, videofile accordingly
 
-T = 3;
+T = 5;
 [video, ~] = mmread('../cars.avi', 1:T);
 
-H = video.height;
-W = video.width;
+HH = video.height;
+WW = video.width;
+
+H = 120;
+W = 240;
 
 v = VideoReader('../cars.avi');
 F = read(v,[1,T]);
+
 C = double(randi([0,1],[H,W,T]));
 Ft = zeros(H,W,T);
 CSnaps = zeros(H,W,T);
 
 I = double(zeros([H,W]));
 for i = 1:T
-    Ft(:,:,i) = rgb2gray(F(:,:,:,i));
+    Ft(:,:,i) = rgb2gray(F(HH-H:HH-1,WW-W:WW-1,:,i));
     CSnaps(:,:,i) = Ft(:,:,i).*C(:,:,i);
     I = I + CSnaps(:,:,i);
 end
@@ -61,20 +65,16 @@ save('data.mat')
 
 wid = T*100;
 
-figure('Position', [50 50 300 wid])
+figure('Position', [10 10 400 wid])
 
 final = recons./cnt;
 toc
 for i=1:T
-    subplot(T,3,3*i-2);
-    imshow(cast(CSnaps(:,:,i),'uint8'));
-    title('Coded Snapshot')
-    
-    subplot(T,3,3*i-1);
+    subplot(T,2,2*i-1);
     imshow(cast(Ft(:,:,i),'uint8'));
     title('Original')
     
-    subplot(T,3,3*i);
+    subplot(T,2,2*i);
     imshow(cast(final(:,:,i),'uint8'));
     title('Reconstructed')
 end
