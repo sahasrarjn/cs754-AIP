@@ -136,7 +136,7 @@ This inequlity follows by the repeated application of the triangle inequality st
 
 **(6) Justify this inequality**
 
-![Screenshot 2021-02-17 at 1.21.14 PM](/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/6.png)
+![Screenshot 2021-02-17 at 1.21.14 PM](assets/6.png)
 
 
 
@@ -152,7 +152,7 @@ From these inequalities we can conclude the required inequality.
 
 **(7) Justify this inequality**
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/7.png" alt="7" style="zoom:40%;" />
+<img src="assets/7.png" alt="7" style="zoom:40%;" />
 
 On rearranging the previous inequality and substituting $||x_{T_0^c}|| = ||x - x_s||_{l_1}$, we get
 $$
@@ -168,7 +168,7 @@ Hence proved
 
 **(8) Justify**
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/8.png" alt="8" style="zoom:35%;" />
+<img src="assets/8.png" alt="8" style="zoom:35%;" />
 
 Applying (11, inequality in the paper), then the previous inequality and then triangle inequality ($||h_{T_0}||_{l_1} < \sqrt s ||h_{T_0}||_{l_2}$), we get
 $$
@@ -186,7 +186,7 @@ where, $e_0 = s^{-1/2} ||x - x_s||_{l_1}$. Since, $||x_{T_0^c}||_{l_1} = ||x - x
 
 
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/9.png" alt="9" style="zoom:35%;" />
+<img src="assets/9.png" alt="9" style="zoom:35%;" />
 
 First part can be concluded by the Cauchy-Schwarz inequality i.e., dot product is less than product of the magnitudes
 
@@ -194,6 +194,7 @@ Also as proved in the previous subparts
 $$
 ||\Phi h||_{l_2} = ||\Phi (x^* - x)||_{l_2} \leq 2 \epsilon
 $$
+
 
 $$
 ||\Phi h_{T_0 \cup T_1}||_{l_2} \leq \sqrt{1 + \delta_{2s}}||h_{T_0 \cup T_1}||_{l_2}
@@ -205,13 +206,13 @@ Combining these inequalities, we will get the required inequality.
 
 **(10) Justify this carefully. See Lemma 1 in this paper.**
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/10.png" alt="10" style="zoom:40%;" />
+<img src="assets/10.png" alt="10" style="zoom:40%;" />
 
 Lemma 2.1 in the paper directly states this where s = s, s' = s (given $T_0, T_j$ are s sparse)
 
 **(11) Justify**
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/11.png" alt="11" style="zoom:50%;" />
+<img src="assets/11.png" alt="11" style="zoom:50%;" />
 
 Since $T_0, T_1$ are disjoint, $h_{T_0 \cup T_1} = h_{T_0} + h_{T_1}$
 
@@ -229,7 +230,7 @@ Hence, proved
 
 **(12) Justify both inequalities carefully.**
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/12.png" alt="12" style="zoom:50%;" />
+<img src="assets/12.png" alt="12" style="zoom:50%;" />
 
 
 
@@ -265,7 +266,7 @@ Adding both these inequalities, we get the final right inequality.
 
 **(13) Justify.**
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/13.png" alt="13" style="zoom:50%;" />
+<img src="assets/13.png" alt="13" style="zoom:50%;" />
 
 Dividing the previous inequality with $1 - \delta_{2S}$ will give the above Inequality
 
@@ -277,7 +278,7 @@ $\alpha = \frac{2 \sqrt{1 + \delta_{2S}}}{1-\delta_{2S}}$ and $\rho = \frac{\sqr
 
 **(14) Justify**
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/14.png" alt="14" style="zoom:40%;" />
+<img src="assets/14.png" alt="14" style="zoom:40%;" />
 
 We will use these statements derived before:
 $$
@@ -294,7 +295,7 @@ Substituting these in the inequality (13) in this report, we will get the requir
 
 **(15) Justify both inequalities in this line.**
 
-![15](/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/15.png)
+![15](assets/15.png)
 
 Left inequality is trivial as: $h = h_{(T_0 \cup T_1)} +h_{(T_0 \cup T_1)^c}$. Follwed by the triangle Inequality we will get the desired Inequality.
 
@@ -310,13 +311,13 @@ On adding $2e_0$ to the 2 times of the above equation will give the desired Ineq
 
 **(16) Justify this inequality** 
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/16.png" alt="16" style="zoom:35%;" />
+<img src="assets/16.png" alt="16" style="zoom:35%;" />
 
 This is the direct conlusion of these statement in the paper:
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/16_2.png" alt="16_2" style="zoom:33%;" />
+<img src="assets/16_2.png" alt="16_2" style="zoom:33%;" />
 
-<img src="/Users/sahasraranjan/Documents/iitb/4th-sem/aip-cs754/assg/2/assets/16_1.png" alt="16_1" style="zoom:33%;" />
+<img src="assets/16_1.png" alt="16_1" style="zoom:33%;" />
 
  Adding these two will give the desired inequality.
 
@@ -435,6 +436,28 @@ $$
 where, $c = \sqrt\frac{1+\delta_{2S}}{1-\delta_{2S}}$
 
 Hence the solution given by Theorem 3 is only a constant factor worse than this solution.
+
+
+
+## Ques 4
+
+Given, $s < t$ where $s$ and $t$ are positive integers. $\delta_s, \delta_t$ are the RIC of sensing matrix $A$ (say) of order s and t respectively.
+
+Now since $s<t$, any s-sparse vector is also t-sparse.
+
+From the RIP, we know (for t-sparse vector):
+$$
+(1 - \delta_{t})||x||^2_2 \leq ||A x||_2^2 \leq (1 + \delta_{t})||x||^2_2
+$$
+Let $v$ be a s-sparse vector
+
+Vector $v$ will satisfy $(1 - \delta_{t})||v||^2_2 \leq ||A v||_2^2 \leq (1 + \delta_{t})||v||^2_2$ since it is also a t-sparse
+
+Now according to the defn, $\delta_s$ is the **smallest** constant $\delta$ which satisfies
+$$
+(1 - \delta)||v||^2_2 \leq ||A v||_2^2 \leq (1 + \delta)||V||^2_2
+$$
+But $\delta_t$ also satisfies this equation. So $\delta_s \leq \delta_t$. Hence proved.
 
 
 
