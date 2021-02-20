@@ -1,9 +1,5 @@
 # HW1 - CS754
 
-Rahul Prajapat - 190050095
-
-Sahasra Ranjan - 190050102
-
 ## 1
 
 1. We know that $\delta_{2s} \propto S$  (also the upperbound: $\delta_{2s} \leq \mu (s-1)$). So, as S increases, $\delta_{2s}$ will increase. Also as m is staying constant, the chances of any 2S columns of measuring matrix being linearly independent decreases as the length of column is fixed and S is increasing. 
@@ -74,7 +70,7 @@ Sahasra Ranjan - 190050102
 
 <img src="images/coded_snapshot5.png" style="zoom:33%;" />
 
-<img src="images/reconstruction5.png" style="zoom:100%;" />
+<img src="images/reconstruction5.png" style="zoom:120%;" />
 
 ### Flames.avi (T=5)
 
@@ -130,12 +126,12 @@ Now, we can represent this as **Ax = b** form:
 
 
 
-**e)** Relative Mean Squared Error between reconstructed and original data:
+**e)** Root mean squared error between reconstructed and original data:
 
-- Relative MSE for T= 3 (cars)  is 0.0138
-- Relative MSE for T= 5 (cars) is 0.0239
-- Relative MSE for T= 5 (flames) is 0.0011 
-- Relative MSE for T= 7 (cars) is 0.0391
+- RMSE for T=5 (flames) is 0.033017 
+- RMSE for T=3 (cars)  is 0.11745
+- RMSE for T=5 (cars) is 0.15479
+- RMSE for T=7 (cars) is 0.19776
 
 These data are for full image reconstruction.
 
