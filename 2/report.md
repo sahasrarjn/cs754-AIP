@@ -372,27 +372,29 @@ Using RIP,
 $$
 (1 - \delta_{2S})||\tilde x - x||^2_2 \leq ||\Phi (\tilde x - x)||_2^2 \leq (1 + \delta_{2S})||\tilde x - x||^2_2
 $$
-We know that:
+Using SVD:
 $$
-||\Phi(\tilde x - x )||_2^2 \\
-= ||\Phi\tilde x -\Phi x||_2^2 \\
-= ||y - \eta - y||_2^2 \\
-= ||\eta||_2^2
+\Phi = U \Sigma V^*\\
+\Phi^\dagger = (U \Sigma V^*)^\dagger\\
+\Phi^\dagger = V \Sigma^\dagger U^*
 $$
-Also,
+$\Sigma^\dagger$ is formed from $\Sigma$ by taking the reciprocal of all the non-zero elements, leaving all the zeros alone 
+
+​																																		[- Ref.(Computing SVD and pseudoinverse)](https://www.johndcook.com/blog/2018/05/05/svd/)
+
+Therfore,
 $$
-||\tilde x - x||_2^2 \leq ||\Phi_S^\dagger||_2||\eta||_2
-$$
-Using these two and the RIP inequality ,
-$$
-(1 - \delta_{2S})||\tilde x - x||^2_2 \leq ||\Phi (\tilde x - x)||_2^2\\
-(1 - \delta_{2S})||\tilde x - x||^2_2  \leq ||\eta||_2^2\\
-(1 - \delta_{2S}) \leq ||\eta||_2^2 / ||\tilde x - x||^2_2\\
-(1 - \delta_{2S}) \leq ||\Phi_S^\dagger||_2^{-2}\\
-||\Phi_S^\dagger||_2 \leq \frac{1}{\sqrt{1-\delta_{2S}}}\\
+||\Phi_S||_2^{-2} = 1/||\Phi^\dagger_S||_2
 $$
 
-Similar steps for the left Inequality on combining will give the required inequality.
+
+Using the RIP inequality,
+$$
+(1 - \delta_{2S})||\tilde x - x||^2_2 \leq ||\Phi (\tilde x - x)||_2^2 \leq (1 + \delta_{2S})||\tilde x - x||^2_2\\
+(1 - \delta_{2S}) \leq \frac{||\Phi (\tilde x - x)||_2^2}{||\tilde x - x||^2_2} \leq (1+\delta_{2S})\\
+(1 - \delta_{2S}) \leq ||\Phi_S||_2^{-2} \leq (1 + \delta_{2S})\\
+\frac{1}{\sqrt{1 + \delta_{2S}}}\leq ||\Phi_S^\dagger||_2 \leq \frac{1}{\sqrt{1-\delta_{2S}}}\\
+$$
 
 
 
