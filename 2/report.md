@@ -434,11 +434,14 @@ Using the RIP inequality,
 $$
 (1 - \delta_{2S})||\tilde x - x||^2_2 \leq ||\Phi_S (\tilde x - x)||_2^2 \leq (1 + \delta_{2S})||\tilde x - x||^2_2\\
 (1 - \delta_{2S}) \leq \frac{||\Phi_S (\tilde x - x)||_2^2}{||\tilde x - x||^2_2} \leq (1+\delta_{2S})\\
-(1 - \delta_{2S}) \leq ||\Phi_S||_2^{2} \leq (1 + \delta_{2S})\\
+(1 - \delta_{2S}) \leq \sigma_{min}(\Phi_S) \leq (1 + \delta_{2S})\\
+$$
+
+Where, $\sigma_{min}(\Phi_S)$ is min singular value of the matrix $\Phi_S$. Also, $||\Phi_S^\dagger|| = 1/\sigma_{min}(\Phi_S)$.
+$$
 (1 - \delta_{2S}) \leq ||\Phi_S^\dagger||_2^{-2} \leq (1 + \delta_{2S})\\
 \frac{1}{\sqrt{1 + \delta_{2S}}}\leq ||\Phi_S^\dagger||_2 \leq \frac{1}{\sqrt{1-\delta_{2S}}}\\
 $$
-
 
 
 **(d)** 
