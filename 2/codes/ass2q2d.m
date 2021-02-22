@@ -29,7 +29,7 @@ function x = ista(y)
     while true
         i = i+1;
         x = soft(x+(temp1-B*x)/alpha,20/(alpha));
-        if i > 10000
+        if i > 100000
             break;
         end
     end

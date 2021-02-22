@@ -2,12 +2,8 @@ clc; clear;
 
 I = imread("barbara256.png");
 J = double(I);
-figure;
-imshow(uint8(J));
 
 J = J + randn(256,256)*2;
-figure;
-imshow(uint8(J));
 
 global A alpha;
 
@@ -36,13 +32,8 @@ imshow(uint8(R));
 function x = ista(y)
     global A alpha
     theta = A.'*y;
-    theta = soft(theta,1/(2*alpha));
+    theta = wthresh(theta,'s',1/(2*alpha));
     x = reshape(A*theta,8,8);
 end
 
 
-function x = soft(y,alpha)
-    x = zeros(size(y));
-    x( y >= alpha ) = y( y >= alpha )-alpha;
-    x( y <= -alpha ) = y( y <= -alpha )+alpha;
-end
