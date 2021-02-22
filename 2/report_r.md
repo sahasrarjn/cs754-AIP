@@ -100,11 +100,11 @@ $\therefore \delta_T\ge\delta_S$
 
 - **Key Objective Function:** 
 
-  > ​		minimize $||z||_1 + \lambda||{\bf y-Az-u}||_1,$
-  >
-  > ​		subject to $||{\bf u}||_2 \le \epsilon,$
-  >
-  > ​								$z \ge 0,$
+  > 		minimize $||z||_1 + \lambda||{\bf y-Az-u}||_1,$
+  >	
+  > 		subject to $||{\bf u}||_2 \le \epsilon,$
+  >	
+  > 								$z \ge 0,$
 
    where $||z||_1$ is the sum of absolute value of all the elements of z
 
