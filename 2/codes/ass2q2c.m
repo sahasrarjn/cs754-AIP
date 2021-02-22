@@ -3,21 +3,11 @@ clc; clear;
 I = imread("barbara256.png");
 J = double(I(1:256,1:256));
 
-global alpha A B;
+global alpha B phi;
 
 phi = randn(32,64);
 
-A = zeros(32,64);
-
-for i = 1:32
-    [t1, t2, t3, t4] = dwt2(reshape(phi(i,:),8,8),'db1');
-    A(i,1:16) = reshape(t1,1,16);
-    A(i,17:32) = reshape(t2,1,16);
-    A(i,33:48) = reshape(t3,1,16);
-    A(i,49:64) = reshape(t4,1,16);
-end
-
-B = A.'*A;
+B = phi.'*phi;
 
 alpha = eigs(B,1);
 
@@ -37,28 +27,25 @@ R = R./D;
 
 figure();
 imshow(uint8(R));
-
+%
 function x = ista(y)
-    global A B alpha
-    
-    temp1 = A.'*y;
-    theta = randi(50,[64 1])+150;
-    i = 0;
-    while true
-        i = i+1;
-        theta = soft(theta+(temp1-B*theta)/alpha,4/alpha);
-        if i > 500
-            break
-        end
-    end
-    x = idwt2(reshape(theta(1:16),4,4),reshape(theta(17:32),4,4),reshape(theta(33:48),4,4),reshape(theta(49:64),4,4),'db1');
-end
+global B alpha phi;
 
-function x = soft(y,alpha)
-    x = zeros(size(y));
-    x( y >= alpha ) = y( y >= alpha )-alpha;
-    x( y <= -alpha ) = y( y <= -alpha )+alpha;
+temp1 = reshape(phi.'*y,[8 8]);
+theta = randi(256,[4 4 4])-1;
+i = 0;
+while true
+    i = i+1;
+    [t1,t2,t3,t4]=dwt2(temp1-reshape(B*reshape(idwt2(theta(:,:,1),theta(:,:,2),theta(:,:,3),theta(:,:,4),'db1'),[64 1]),[8 8]),'db1');
+    theta = wthresh(theta+cat(3,t1,t2,t3,t4)/alpha,'s',1/(2*alpha));
+    if i > 15
+        break
+    end
 end
+x = idwt2(theta(:,:,1),theta(:,:,2),theta(:,:,3),theta(:,:,4),'db1');
+end
+%
 
 %}
+
 

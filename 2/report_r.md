@@ -2,15 +2,21 @@
 
 RMSE : $norm(x'-x)/norm(x)$
 
-- a) RMSE  = 0.0020
+- a) RMSE  = 0.0014
 
   <img src="images/a.jpg">
 
 - b) RMSE = 0.1182
 
+  $\lambda = 1$ gives images with very dark tone so I have canged it to 40.
+
   <img src="images/b.jpg">
 
-- c) RMSE = 
+- c) RMSE = 0.2991
+
+  As it is taking too long with the function handles I have restricted iterations to 20.
+
+  <img src="images/c.jpg">
 
   
 
