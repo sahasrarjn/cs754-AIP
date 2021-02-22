@@ -321,7 +321,23 @@ This is the direct conlusion of these statement in the paper:
 
  Adding these two will give the desired inequality.
 
------
+
+
+## Ques 2
+
+RMSE : $norm(x'-x)/norm(x)$
+
+- a) RMSE  = 
+
+- b) RMSE = 
+
+- c) RMSE = 
+
+  
+
+- d) RMSE = 0.7-0.9 
+
+  The error is very high for the algorithm to work. The algorithm gives very bad results.
 
 
 
@@ -410,15 +426,16 @@ $\Sigma^\dagger$ is formed from $\Sigma$ by taking the reciprocal of all the non
 
 Therfore,
 $$
-||\Phi_S||_2^{-2} = 1/||\Phi^\dagger_S||_2
+||\Phi_S||_2^{-2} = ||\Phi^\dagger_S||_2^2
 $$
 
 
 Using the RIP inequality,
 $$
-(1 - \delta_{2S})||\tilde x - x||^2_2 \leq ||\Phi (\tilde x - x)||_2^2 \leq (1 + \delta_{2S})||\tilde x - x||^2_2\\
-(1 - \delta_{2S}) \leq \frac{||\Phi (\tilde x - x)||_2^2}{||\tilde x - x||^2_2} \leq (1+\delta_{2S})\\
-(1 - \delta_{2S}) \leq ||\Phi_S||_2^{-2} \leq (1 + \delta_{2S})\\
+(1 - \delta_{2S})||\tilde x - x||^2_2 \leq ||\Phi_S (\tilde x - x)||_2^2 \leq (1 + \delta_{2S})||\tilde x - x||^2_2\\
+(1 - \delta_{2S}) \leq \frac{||\Phi_S (\tilde x - x)||_2^2}{||\tilde x - x||^2_2} \leq (1+\delta_{2S})\\
+(1 - \delta_{2S}) \leq ||\Phi_S||_2^{2} \leq (1 + \delta_{2S})\\
+(1 - \delta_{2S}) \leq ||\Phi_S^\dagger||_2^{-2} \leq (1 + \delta_{2S})\\
 \frac{1}{\sqrt{1 + \delta_{2S}}}\leq ||\Phi_S^\dagger||_2 \leq \frac{1}{\sqrt{1-\delta_{2S}}}\\
 $$
 
@@ -495,7 +512,6 @@ But $\delta_t$ also satisfies this equation. So $\delta_s \leq \delta_t$. Hence 
 
   
 
-
 - **Key Objective Function:** 
 
   > ​		minimize $||z||_1 + \lambda||{\bf y-Az-u}||_1,$
@@ -503,7 +519,6 @@ But $\delta_t$ also satisfies this equation. So $\delta_s \leq \delta_t$. Hence 
   > ​		subject to $||{\bf u}||_2 \le \epsilon,$
   >
   > ​								$z \ge 0,$
-
 
    where $||z||_1$ is the sum of absolute value of all the elements of z
 
@@ -543,12 +558,12 @@ But $\delta_t$ also satisfies this equation. So $\delta_s \leq \delta_t$. Hence 
 
 
 
-- - The main purpose of error correcting pooled testing is to increase test reliability, not to reduce required test numbers as in tapestry pooling.
-  - In error detection codes using pooled testing, it doesn't require the involved signal to be sparse as what we consider in tapestry pooling: the signal can be fully dense in the proposed strategy.
-  - The intuition behind tapestry is that the current rate of COVID-19 infections in the world population means that most samples tested are not infected, so most tests are wasted on uninfected samples. So tapestry uses this redundancy by group pooling to save on testing resources.
-  - The intuition behnd the proposed strategy is that when each individual's sample is part of many pooled sample mixtures, the test results from all of the sample mixtures contain redundant information about each individual's diagnosis, which can be exploited to automatically correct for wrong test results in exactly the same way that error correction codes correct errors introduced in noisy communication channels.
-  - Tapestry uses a two-stage approach. In the first stage all the negative pools are identified and the comprising samples are ruled out for the next step. In the second stage compressive sensing is applied to decrease false positives and estimate respective viral loads.
-  - The proposed approach uses compressive sensing by assuming the gross error is sparse to estimate viral loads in any regime (undersampled or oversampled) without increasing number of tests required. So it is single stage.
+- The main purpose of error correcting pooled testing is to increase test reliability, not to reduce required test numbers as in tapestry pooling.
+- In error detection codes using pooled testing, it doesn't require the involved signal to be sparse as what we consider in tapestry pooling: the signal can be fully dense in the proposed strategy.
+- The intuition behind tapestry is that the current rate of COVID-19 infections in the world population means that most samples tested are not infected, so most tests are wasted on uninfected samples. So tapestry uses this redundancy by group pooling to save on testing resources.
+- The intuition behnd the proposed strategy is that when each individual's sample is part of many pooled sample mixtures, the test results from all of the sample mixtures contain redundant information about each individual's diagnosis, which can be exploited to automatically correct for wrong test results in exactly the same way that error correction codes correct errors introduced in noisy communication channels.
+- Tapestry uses a two-stage approach. In the first stage all the negative pools are identified and the comprising samples are ruled out for the next step. In the second stage compressive sensing is applied to decrease false positives and estimate respective viral loads.
+- The proposed approach uses compressive sensing by assuming the gross error is sparse to estimate viral loads in any regime (undersampled or oversampled) without increasing number of tests required. So it is single stage.
 
 -----
 
