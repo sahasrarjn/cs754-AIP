@@ -579,9 +579,9 @@ $ \lambda(||x'||_1 - ||x||_1) \ge 0 $
 
 $||x'||_1\ge||x||_1$ 																   (As $\lambda$ is positive)
 
-$||x'||_1=||x||_1$ 																   (As $x'$ is a minimizer of P1)
+$||x'||_1=||x||_1$ 																   (As $x'$ is a minimizer of P1 and x also satisfies 																								P1's contraint $||y-\phi x||_2 \le \epsilon$)
 
-This implies $x$ is also a minimizer of the problem P1. ( As  $||y-\phi x||_2 = \epsilon$)
+This implies $x$ is also a minimizer of the problem P1. 
 
 We have proved that for this $\epsilon$ it, indeed, is possible.
 
