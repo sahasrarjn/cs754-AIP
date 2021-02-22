@@ -341,6 +341,32 @@ RMSE : $norm(x'-x)/norm(x)$
 
 
 
+## Ques 2
+
+RMSE : $norm(x'-x)/norm(x)$
+
+- a) RMSE  = 0.0014
+
+  <img src="images/a.jpg">
+
+- b) RMSE = 0.1182
+
+  $\lambda = 1$ gives images with very dark tone so I have canged it to 40.
+
+  <img src="images/b.jpg">
+
+- c) RMSE = 0.2991
+
+  As it is taking too long with the function handles I have restricted iterations to 15.
+
+  <img src="images/c.jpg">
+
+- d) RMSE = 0.7-0.9 
+
+  The error is very high for the algorithm to work. The algorithm gives very bad results.
+
+-----
+
 
 
 ## Ques 3
@@ -580,6 +606,9 @@ $\therefore \delta_T\ge\delta_S$
   - Tapestry uses a two-stage approach. In the first stage all the negative pools are identified and the comprising samples are ruled out for the next step. In the second stage compressive sensing is applied to decrease false positives and estimate respective viral loads.
   - The proposed approach uses compressive sensing by assuming the gross error is sparse to estimate viral loads in any regime (undersampled or oversampled) without increasing number of tests required. So it is single stage.
 
+-----
+
+
 
 
 ## Ques 6
@@ -606,11 +635,13 @@ $ \lambda(||x'||_1 - ||x||_1) \ge 0 $
 
 $||x'||_1\ge||x||_1$ 																   (As $\lambda$ is positive)
 
-$||x'||_1=||x||_1$ 																   (As $x'$ is a minimizer of P1)
+$||x'||_1=||x||_1$ 																   (As $x'$ is a minimizer of P1 and x also satisfies 																								P1's contraint $||y-\phi x||_2 \le \epsilon$)
 
-This implies $x$ is also a minimizer of the problem P1. ( As  $||y-\phi x||_2 = \epsilon$)
+This implies $x$ is also a minimizer of the problem P1. 
 
 We have proved that for this $\epsilon$ it, indeed, is possible.
 
 Therefore, there exists some value of $\epsilon$ for which minimizer of LASSO is also a minimizer of P1.
+
+-----
 
