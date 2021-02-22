@@ -341,7 +341,7 @@ RMSE : $norm(x'-x)/norm(x)$
 
 - c) RMSE = 0.2991
 
-  As it is taking too long with the function handles I have restricted iterations to 20.
+  As it is taking too long with the function handles I have restricted iterations to 15.
 
   <img src="images/c.jpg">
 
