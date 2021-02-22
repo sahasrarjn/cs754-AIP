@@ -34,7 +34,7 @@ function x = ista(y)
     theta = randi(256,[64 1])-1;
     i = 0;
     while true
-        thetanxt = soft(theta+(temp1-B*theta)/alpha,20/alpha);
+        thetanxt = wthresh(theta+(temp1-B*theta)/alpha,'s',20/alpha);
         if norm(thetanxt-theta) <= 0.1
             theta = thetanxt;
             break
@@ -42,12 +42,6 @@ function x = ista(y)
         theta = thetanxt;
     end
     x = reshape(U*theta,8,8);
-end
-
-function x = soft(y,alpha)
-    x = zeros(size(y));
-    x( y >= alpha ) = y( y >= alpha )-alpha;
-    x( y <= -alpha ) = y( y <= -alpha )+alpha;
 end
 
 %}
