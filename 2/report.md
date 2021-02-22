@@ -426,15 +426,16 @@ $\Sigma^\dagger$ is formed from $\Sigma$ by taking the reciprocal of all the non
 
 Therfore,
 $$
-||\Phi_S||_2^{-2} = 1/||\Phi^\dagger_S||_2
+||\Phi_S||_2^{-2} = ||\Phi^\dagger_S||_2^2
 $$
 
 
 Using the RIP inequality,
 $$
-(1 - \delta_{2S})||\tilde x - x||^2_2 \leq ||\Phi (\tilde x - x)||_2^2 \leq (1 + \delta_{2S})||\tilde x - x||^2_2\\
-(1 - \delta_{2S}) \leq \frac{||\Phi (\tilde x - x)||_2^2}{||\tilde x - x||^2_2} \leq (1+\delta_{2S})\\
-(1 - \delta_{2S}) \leq ||\Phi_S||_2^{-2} \leq (1 + \delta_{2S})\\
+(1 - \delta_{2S})||\tilde x - x||^2_2 \leq ||\Phi_S (\tilde x - x)||_2^2 \leq (1 + \delta_{2S})||\tilde x - x||^2_2\\
+(1 - \delta_{2S}) \leq \frac{||\Phi_S (\tilde x - x)||_2^2}{||\tilde x - x||^2_2} \leq (1+\delta_{2S})\\
+(1 - \delta_{2S}) \leq ||\Phi_S||_2^{2} \leq (1 + \delta_{2S})\\
+(1 - \delta_{2S}) \leq ||\Phi_S^\dagger||_2^{-2} \leq (1 + \delta_{2S})\\
 \frac{1}{\sqrt{1 + \delta_{2S}}}\leq ||\Phi_S^\dagger||_2 \leq \frac{1}{\sqrt{1-\delta_{2S}}}\\
 $$
 
@@ -483,69 +484,27 @@ Hence the solution given by Theorem 3 is only a constant factor worse than this 
 
 
 
-##  Ques 4
+## Ques 4
 
-We Have:
+Given, $s < t$ where $s$ and $t$ are positive integers. $\delta_s, \delta_t$ are the RIC of sensing matrix $A$ (say) of order s and t respectively.
 
-- $\delta_{S}$ = $\max\{1-\lambda_{\min},\lambda_{\max}-1\}$
-- $\lambda_{\max}$ = $\max_{\theta_{\tau}\epsilon\R^{S},|\tau|\le S}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2}$ 
-- $\lambda_{\min}$ = $\min_{\theta_{\tau}\epsilon\R^{S},|\tau|\le S}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2}$
+Now since $s<t$, any s-sparse vector is also t-sparse.
 
-As $S\lt T$ ;
+From the RIP, we know (for t-sparse vector):
 $$
-|\tau| \le T \text{ can be divided as } \tau' \text{ and } \tau'' \text{ such that }\\
-|\tau'| \le S \text{ and } S \lt |\tau''| \le T
+(1 - \delta_{t})||x||^2_2 \leq ||A x||_2^2 \leq (1 + \delta_{t})||x||^2_2
 $$
+Let $v$ be a s-sparse vector
 
+Vector $v$ will satisfy $(1 - \delta_{t})||v||^2_2 \leq ||A v||_2^2 \leq (1 + \delta_{t})||v||^2_2$ since it is also a t-sparse
+
+Now according to the defn, $\delta_s$ is the **smallest** constant $\delta$ which satisfies
 $$
-\lambda_{S\max} = \max_{\theta_{\tau}\epsilon\R^{S},|\tau|\le S}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2} \text{ , }
-\lambda_{T\max} = \max_{\theta_{\tau}\epsilon\R^{T},|\tau|\le T}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2}\\
+(1 - \delta)||v||^2_2 \leq ||A v||_2^2 \leq (1 + \delta)||V||^2_2
 $$
-
-- 
-
-$$
-\max_{\theta_{\tau}\epsilon\R^{T},|\tau|\le T}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2} = \max(\max_{\theta_{\tau}\epsilon\R^{T},|\tau|\le S}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2}, \max_{\theta_{\tau}\epsilon\R^{T},S \lt |\tau|\le T}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2})\\
-= \max(\max_{\theta_{\tau}\epsilon\R^{S},|\tau|\le S}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2}, \max_{\theta_{\tau}\epsilon\R^{T},S \lt |\tau|\le T}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2})\\
-= \max(\lambda_{S \max}, \max_{\theta_{\tau}\epsilon\R^{T},S \lt |\tau|\le T}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2})\\
-\Rightarrow \lambda_{T \max} \ge \lambda_{S \max}\\
-\Rightarrow \lambda_{T \max}-1 \ge \lambda_{S \max}-1
-$$
-
-- 
-
-$$
-\min_{\theta_{\tau}\epsilon\R^{T},|\tau|\le T}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2} = \min(\min_{\theta_{\tau}\epsilon\R^{S},|\tau|\le S}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2}, \min_{\theta_{\tau}\epsilon\R^{T},S \lt |\tau|\le T}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2})\\
-= \min(\lambda_{S \min}, \min_{\theta_{\tau}\epsilon\R^{T},S \lt |\tau|\le T}\frac{||A_{\tau}\theta_{\tau}||^2}{||\theta_{\tau}||^2})\\
-\Rightarrow \lambda_{T \min} \le \lambda_{S \min}\\
-\Rightarrow 1-\lambda_{T \min} \ge 1-\lambda_{S \min}
-$$
-
-Case 1  
-
-$\lambda_{T \max}-1\ge 1-\lambda_{T \min}$:
-
-As $\lambda_{T \max}-1 \ge \lambda_{S \max}-1$ and $\lambda_{T \max}-1\ge 1-\lambda_{T \min} \ge 1-\lambda_{S \min}$
-
- $\max\{\lambda_{T \max}-1,1-\lambda_{T \min}\}\ge\max\{\lambda_{S \max}-1,1-\lambda_{S \min}\}$
-
-$\delta_T\ge\delta_S$
+But $\delta_t$ also satisfies this equation. So $\delta_s \leq \delta_t$. Hence proved.
 
 
-
-Case 2 
-
- $1-\lambda_{T \min}\ge\lambda_{T \max}-1$:
-
-As $1-\lambda_{T \min}\ge\lambda_{T \max}-1 \ge \lambda_{S \max}-1$ and $1-\lambda_{T \min} \ge 1-\lambda_{S \min}$
-
-$\max\{\lambda_{T \max}-1,1-\lambda_{T \min}\}\ge\max\{\lambda_{S \max}-1,1-\lambda_{S \min}\}$
-
-$\delta_T\ge\delta_S$
-
-
-
-$\therefore \delta_T\ge\delta_S$
 
 ## Ques 5
 
