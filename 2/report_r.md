@@ -2,9 +2,13 @@
 
 RMSE : $norm(x'-x)/norm(x)$
 
-- a) RMSE  = 
+- a) RMSE  = 0.0020
 
-- b) RMSE = 
+  <img src="images/a.jpg">
+
+- b) RMSE = 0.1182
+
+  <img src="images/b.jpg">
 
 - c) RMSE = 
 

@@ -2,8 +2,6 @@ clc; clear;
 
 I = imread("barbara256.png");
 J = double(I(1:256,1:256));
-figure;
-imshow(uint8(J));
 
 global A B alpha U;
 
@@ -32,27 +30,16 @@ imshow(uint8(R));
 
 function x = ista(y)
     global A B alpha U
-    %disp(size(A.'));
-    %disp(size(y));
     temp1 = A.'*y;
     theta = randi(256,[64 1])-1;
     i = 0;
     while true
-        %thetanxt = soft(theta+(temp1-B*theta)/alpha,50/alpha);
-        %
-        theta = soft(theta+(temp1-B*theta)/alpha,50/alpha);
-        i = i+1;
-        if i>1000
-            break
-        end
-        %}
-        %{
+        thetanxt = soft(theta+(temp1-B*theta)/alpha,20/alpha);
         if norm(thetanxt-theta) <= 0.1
             theta = thetanxt;
             break
         end
         theta = thetanxt;
-        %}
     end
     x = reshape(U*theta,8,8);
 end

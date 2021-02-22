@@ -2,12 +2,8 @@ clc; clear;
 
 I = imread("barbara256.png");
 J = double(I);
-figure;
-imshow(uint8(J));
 
 J = J + randn(256,256)*2;
-figure;
-imshow(uint8(J));
 
 global A alpha;
 

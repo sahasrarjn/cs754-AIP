@@ -2,8 +2,6 @@ clc; clear;
 
 I = imread("barbara256.png");
 J = double(I(1:256,1:256));
-figure;
-imshow(uint8(J));
 
 global alpha A B;
 
@@ -48,8 +46,8 @@ function x = ista(y)
     i = 0;
     while true
         i = i+1;
-        theta = soft(theta+(temp1-B*theta)/alpha,1/alpha);
-        if i > 100
+        theta = soft(theta+(temp1-B*theta)/alpha,4/alpha);
+        if i > 500
             break
         end
     end
