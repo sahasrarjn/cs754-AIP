@@ -424,11 +424,6 @@ $\Sigma^\dagger$ is formed from $\Sigma$ by taking the reciprocal of all the non
 
 ​																																		[- Ref.(Computing SVD and pseudoinverse)](https://www.johndcook.com/blog/2018/05/05/svd/)
 
-Therfore,
-$$
-||\Phi_S||_2^{-2} = ||\Phi^\dagger_S||_2^2
-$$
-
 
 Using the RIP inequality,
 $$
