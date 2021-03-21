@@ -15,6 +15,7 @@ classdef classA
             A.trans=0;
         end
         function res = mtimes(A, beta)
+            % * Operator overloading
             if A.trans == 0 
                 x = reshape(beta,A.imgSize, A.imgSize);
                 RUb = radon(idct2(x),A.theta);
@@ -26,6 +27,7 @@ classdef classA
             end
         end
         function At = ctranspose(A)
+            % ' Operator overloading
             A.trans = xor(A.trans,1);
             At = A;
         end

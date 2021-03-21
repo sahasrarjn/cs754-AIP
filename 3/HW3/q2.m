@@ -48,6 +48,7 @@ m = numel(R1);
 n = imgSize*imgSize;
 y = R1(:);
 
+% These parameters are taken from the example file in l1_ls folder
 lambda  = 0.01; % regularization parameter
 rel_tol = 0.01; % relative target duality gap
 quiet = true;
