@@ -15,6 +15,7 @@ classdef classA2
             A.trans=false;
         end
         function res = mtimes(A, beta)
+            % * operator overloading 
             if A.trans == false
                 sz = size(beta,1);
                 b1 = beta(1:sz/2);
@@ -42,6 +43,7 @@ classdef classA2
             end
         end
         function At = ctranspose(A)
+            % ' operator overloading 
             A.trans = ~A.trans;
             At = A;
         end
