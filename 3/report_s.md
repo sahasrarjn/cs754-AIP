@@ -16,7 +16,7 @@ For a function to be strongly convex at $\beta^*$, $\frac{v^T\nabla^2f(\beta)v}{
 	
 But as our cost function's second derivative is $\frac{X^TX}{N}$ so it is not strongly convex, but it is strongly convex in some subspace.
 	
-So our restricted eigenvalue condition: $\frac{v^TX^TXv}{N||v||_2^2} \ge \gamma \text{, for all nonzero } v\in C,\text{ for some } C \sub \R^p$
+So our restricted eigenvalue condition states: $\frac{v^TX^TXv}{N||v||_2^2} \ge \gamma \text{, for all nonzero } v\in C,\text{ for some } C \sub \R^p$
 
 
 
@@ -132,9 +132,12 @@ $$
 $$
 
 
+
 **g) Where does bound on** $\bf{\lambda_N}$ **show up**
 
 While deriving 11.23 we took $\lambda_N\ge\frac{2}{N}||X^Tw||_\infty,$ we assumed it to introduce conic constraint in $\hat v,$ so as to apply $\gamma$-RE condition .
+
+
 
 **h) Why is cone constraint required**
 
@@ -149,8 +152,7 @@ Cone constraint gives the $\gamma$-RE condition, using which we bounded the the 
 - Both theorems handle noisy measurements.
 - Theorem 3 give bounds for compressible signals ( signals in which some values are very-very smaller than others ), while this theorem only considers sparse signals.
 -  Restricted Eigenvalue Condition is less restrictive than the Restricted Isometry Property, so this theorem requires weaker assumptions than Theorem 3.
--  This theorem is more obvious as it have $\frac{k}{N}$ term in the bound as it states no method can decay more quickly than $\frac{k}{N},$ while theorem 3 doesn't have any say about it in it's bound.
--  This theorem states that this estimator gives near oracle performance ( $\sqrt{log(n)}$ is additional) if $\sigma$ is previously known or estimated on Gaussian noise.
+-  This theorem has $\frac{k}{N}$ term in it's bound which gives it an intuitive edge (also it uses strong convexity which is more intuitive in comparison to RIP),  while theorem 3 doesn't have any say about it in it's bound.
 
 
 
