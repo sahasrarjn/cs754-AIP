@@ -53,20 +53,39 @@ m = numel(R1);
 n = imgSize*imgSize;
 y = R1(:);
 
-% These parameters are taken from the example file in l1_ls folder
-
 [I1, ~] = l1_ls(A,At,m,n,y,lambda,rel_tol,quiet);
 I1 = reshape(I1, imgSize, imgSize);
 I1 = idct2(I1);
 
-figure 
-subplot(1,2,1);
-imshow(Im1);
-title("Original Image")
 
-subplot(1,2,2);
+Rsize = size(R2,1);
+A = classA(imgSize,theta2,Rsize);
+At = A';
+m = numel(R2);
+n = imgSize*imgSize;
+y = R2(:);
+
+[I2, ~] = l1_ls(A,At,m,n,y,lambda,rel_tol,quiet);
+I2 = reshape(I2, imgSize, imgSize);
+I2 = idct2(I2);
+
+
+figure 
+subplot(2,2,1);
+imshow(Im1);
+title("Original Image 1")
+
+subplot(2,2,3);
 imshow(I1);
-title("Recons. Image (DCT, single slice)")
+title("Recons. Image (DCT, single slice) 1")
+
+subplot(2,2,2);
+imshow(Im2);
+title("Original Image 2")
+
+subplot(2,2,4);
+imshow(I2);
+title("Recons. Image (DCT, single slice) 2")
 saveas(gcf,'reconstruction1.png', 'png');
 
 
