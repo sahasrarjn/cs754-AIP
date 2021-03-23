@@ -145,19 +145,19 @@ Polar equation of line $x \cos \theta + y \sin \theta = \rho$ will be $r \cos \t
 $$
 r \cos \theta \cos \psi + r \sin \theta \sin \psi - \rho\\
 
-= r cos(\psi - \theta) - \rho
+= r cos(\theta - \psi) - \rho
 $$
 Using these in the Radon transform, we get:
 
 
 $$
-R(g')(\rho, \theta) = \int_{-\infty}^{\infty} \int_{0}^{2 \pi} g'(r,\psi) \delta(r \cos (\psi - \theta) -\rho) d\psi dr\\
+R(g')(\rho, \theta) = \int_{-\infty}^{\infty} \int_{0}^{2 \pi} g'(r,\psi) \delta(r \cos (\theta - \psi) -\rho) d\psi dr\\
 
-= \int_{-\infty}^{\infty} \int_{0}^{2 \pi} g(r,\psi-\psi_0) \delta(r \cos (\psi - \theta) -\rho) d\psi dr\\
+= \int_{-\infty}^{\infty} \int_{0}^{2 \pi} g(r,\psi-\psi_0) \delta(r \cos (\theta - \psi) -\rho) d\psi dr\\
 $$
 With change of variable ($\psi' = \psi-\psi_0$), we get:
 $$
-R(g')(\rho,\theta) = \int_{-\infty}^{\infty} \int_{0}^{2 \pi} g(r,\psi') \delta(r \cos (\psi' - (\theta - \psi_0)) -\rho) d\psi' dr\\
+R(g')(\rho,\theta) = \int_{-\infty}^{\infty} \int_{0}^{2 \pi} g(r,\psi') \delta(r \cos (\theta - (\phi' + \psi_0)) -\rho) d\psi' dr\\
 
 = R(g)(\rho, \psi_0 - \theta)
 $$
