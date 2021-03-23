@@ -4,8 +4,6 @@
 
 #### Rahul Prajapat - 190050095
 
-
-
 ### Q1
 
 **a) Define the restricted eigenvalue condition**
@@ -182,17 +180,17 @@ For this, we took k=18 random samples for each image using the function `randsam
 
 **Filtered Back Projection using the Ram-Lak filter**
 
-<img src="images/reconstruction0.png" alt="reconstruction0" style="zoom:33%;" />
+<img src="images/reconstruction0.png" alt="reconstruction0" style="zoom: 50%;" />
 
-​			Fig 1. Reconstruction using  filtered back projection using the Ram-Lak filter
+​										Fig 1. Reconstruction using  filtered back projection using the Ram-Lak filter
 
 
 
 **Compression Sensing reconstruction (single slice)**
 
-<img src="images/reconstruction1.png" alt="reconstruction1" style="zoom:33%;" />
+<img src="images/reconstruction1.png" alt="reconstruction1" style="zoom: 50%;" />
 
-​			Fig 2. Reconstruction using Compressed Sensing on a single slice (2D-DCT basis).
+​										Fig 2. Reconstruction using Compressed Sensing on a single slice (2D-DCT basis).
 
 
 
@@ -223,10 +221,9 @@ $$
 
 
 
+<img src="images/reconstruction2.png" alt="reconstruction2" style="zoom: 50%;" />
 
-<img src="images/reconstruction2.png" alt="reconstruction2" style="zoom:33%;" />
-
-​				Fig 3. Reconstruction using CS on two consecutive slices (2D-DCT basis).
+​											Fig 3. Reconstruction using CS on two consecutive slices (2D-DCT basis).
 
 
 
@@ -278,9 +275,9 @@ $$
 
 
 
-<img src="images/reconstruction3.png" alt="reconstruction3" style="zoom:33%;" />
+<img src="images/reconstruction3.png" alt="reconstruction3" style="zoom:50%;" />
 
-​				Fig 4. Reconstruction using CS on three consecutive slices (2D-DCT basis).
+​											Fig 4. Reconstruction using CS on three consecutive slices (2D-DCT basis).
 
 
 
@@ -323,11 +320,10 @@ R(g')(\rho, \theta) = \int_{-\infty}^{\infty} \int_{0}^{2 \pi} g'(r,\psi) \delta
 $$
 With change of variable ($\psi' = \psi-\psi_0$), we get:
 $$
-R(g')(\rho,\theta) = \int_{-\infty}^{\infty} \int_{0}^{2 \pi} g(r,\psi') \delta(r \cos (\theta - (\phi' + \psi_0)) -\rho) d\psi' dr\\
+R(g')(\rho,\theta) = \int_{-\infty}^{\infty} \int_{0}^{2 \pi} g(r,\psi') \delta(r \cos (\theta - (\psi' + \psi_0)) -\rho) d\psi' dr\\
 
-= R(g)(\rho, \psi_0 - \theta)
+= R(g)(\rho, \theta - \psi_0)
 $$
-
 
 **(c) Convolution :**
 $$
@@ -349,7 +345,7 @@ $$
 \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \delta(a - \rho + \varrho) \delta(a - \varrho) d\rho d\varrho 
 = \int_{-\infty}^{\infty} \delta (a - \rho) d\rho
 $$
-And, we can represent $f(x',y')$ as $f(x-\tau, y-\varphi)$ to have same integral (both from $-\infty \to \infty$). We get,
+And, we can represent $f(x',y')$ as $f(x-\tau, y-\varphi)$ to have same integral (both from $-\infty \to \infty$, also both $\tau, \varphi$ are $-ve$ so will cancel out). We get,
 $$
 \int_{-\infty}^{\infty} R_\theta(f) (\rho - \varrho) R_\theta(k)(\varrho) d\varrho \\
 
@@ -457,4 +453,4 @@ LM Regularization procedure :
 $$
 \underline{\hat\epsilon}_\delta(\beta) = (\underline{\underline{{\bf L}}}^H\underline{\underline{{\bf L}}}+\beta {\bf I})^{-1} \underline{\underline{{\bf L}}}^H \underline{ E}^S 
 $$
-where ${\bf L}^H$ denotes the adjoint of $\bf L$ and $\beta$ is the regularization parameter in the Tikhonov sense.
+where ${\bf L}^H$ denotes the adjoint of $\bf L$ and $\beta$ is the regularisation parameter in the Tikhonov sense.
