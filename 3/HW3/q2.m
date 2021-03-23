@@ -6,6 +6,11 @@ theta1 = randsample(180, k) - 1;
 theta2 = randsample(180, k) - 1;
 theta3 = randsample(180, k) - 1;
 
+lambda  = 0.001; % regularization parameter
+rel_tol = 0.0001; % relative target duality gap
+quiet = false;
+
+
 Im1 = loadFig("slice_50.png");
 Im2 = loadFig("slice_51.png");
 Im3 = loadFig("slice_52.png");
@@ -49,9 +54,6 @@ n = imgSize*imgSize;
 y = R1(:);
 
 % These parameters are taken from the example file in l1_ls folder
-lambda  = 0.01; % regularization parameter
-rel_tol = 0.01; % relative target duality gap
-quiet = true;
 
 [I1, ~] = l1_ls(A,At,m,n,y,lambda,rel_tol,quiet);
 I1 = reshape(I1, imgSize, imgSize);
@@ -79,13 +81,9 @@ Rsize = size(R1,1);
 A = classA2(imgSize,theta,Rsize);
 At = A';
 
-m = numel(R,1);
+m = numel(R);
 n = 2*imgSize^2;
 y = R(:);
-
-lambda  = 0.01; % regularization parameter
-rel_tol = 0.01; % relative target duality gap
-quiet = true;
 
 [I12, ~] = l1_ls(A,At,m,n,y,lambda,rel_tol,quiet);
 I1 = I12(1:size(I12)/2);
@@ -131,13 +129,10 @@ Rsize = size(R1,1);
 A = classA3(imgSize,theta,Rsize);
 At = A';
 
-m = numel(R,1);
+m = numel(R);
 n = 3*imgSize^2;
 y = R(:);
 
-lambda  = 0.01; % regularization parameter
-rel_tol = 0.01; % relative target duality gap
-quiet = true;
 
 [I, ~] = l1_ls(A,At,m,n,y,lambda,rel_tol,quiet);
 I1 = I(1:size(I)/3);
@@ -177,3 +172,4 @@ title("Recons. Image 3")
 saveas(gcf,'reconstruction3.png', 'png');
 
 
+close all;
