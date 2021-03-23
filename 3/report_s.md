@@ -176,6 +176,8 @@ Cone constraint gives the $\gamma$-RE condition, using which we bounded the the 
 
 ### Q2
 
+For this, we took k=18 random samples for each image using the function `randsample`. For the first part, we using `radon` and `iradon` functions. And for the later subparts, implemented function handles to get $A, A^T$ to pass in the `l1_ls` function provided in the hw folder. The reconstructions for (k=18) are provided here and for (k=60) are added in the images folder (`/images/k60`). 
+
 **Filtered Back Projection using the Ram-Lak filter**
 
 <img src="images/reconstruction0.png" alt="reconstruction0" style="zoom:33%;" />
