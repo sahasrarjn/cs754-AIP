@@ -331,27 +331,15 @@ $$
 $$
 
 $$
-LHS = R_\theta (f * k) (\rho) \\
 = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} f(x-\tau,y-\varphi) k(\tau,\varphi) \delta(x \cos \theta + y \sin \theta - \rho) d\tau d\varphi d\rho\\
-$$
 
-$$
-RHS = R_\theta(f) * R_\theta(k)\\
+= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} k(\tau,\varphi) R_\theta(f(\rho - \rho'))(\rho'- \tau \cos \theta -\varphi \sin \theta, \theta) d\tau d\varphi d\rho'\\
 
-= \int_{-\infty}^{\infty} R_\theta(f) (\rho - \varrho) R_\theta(k)(\varrho) d\varrho \\
-$$
-Since, 
-$$
-\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \delta(a - \rho + \varrho) \delta(a - \varrho) d\rho d\varrho 
-= \int_{-\infty}^{\infty} \delta (a - \rho) d\rho
-$$
-And, we can represent $f(x',y')$ as $f(x-\tau, y-\varphi)$ to have same integral (both from $-\infty \to \infty$, also both $\tau, \varphi$ are $-ve$ so will cancel out). We get,
-$$
-\int_{-\infty}^{\infty} R_\theta(f) (\rho - \varrho) R_\theta(k)(\varrho) d\varrho \\
+= \int_{-\infty}^{\infty} R_\theta(k(\rho',\theta)) R_\theta(f(\rho-\rho',\theta))\\
 
-= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x-\tau,y-\varphi) k(\tau,\varphi) \delta(x \cos \theta + y \sin \theta - \rho) d\tau d\varphi d\rho \\
+= R_\theta(f) * R_\theta(g)\\
 
-\therefore LHS = RHS
+= R_\theta (f * g)
 $$
 
 
