@@ -23,6 +23,7 @@ n=256;
 spar=10;
 eps = 1e-3;
 sigma=[0.0001, 0.0005, 0.001, 0.005, 0.01, 0.02];
+% sigma = 0.01:0.01:1;
 rmse = zeros(6,2);
 
 i = 1;
@@ -45,6 +46,7 @@ saveas(gcf,'image1.png','png');
 k=1;
 n=256;
 spar=[5, 10, 15, 20, 30, 50];
+% spar = 5:1:30;
 sigma=0.01;
 eps = 1e-3;
 rmse = zeros(6,2);

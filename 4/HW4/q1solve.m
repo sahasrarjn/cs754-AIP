@@ -16,7 +16,7 @@ function [fo1, fo2, rmse1, rmse2] = q1solve(n,spar,k,eps, sigma_k)
     A2 = eye(n);
     
     % Generating noise
-    sigma = sigma_k*mean(f1+f2);
+    sigma = sigma_k*mean(f1+f2,'all');
     gm = gmdistribution(0,sigma);
     eta = random(gm,n);
     
@@ -29,8 +29,8 @@ function [fo1, fo2, rmse1, rmse2] = q1solve(n,spar,k,eps, sigma_k)
     fo1 = A1*theta(1:n,:);
     fo2 = A2*theta(n+1:2*n,:);
     
-    rmse1 = sqrt(mean((fo1-f1).^2));
-    rmse2 = sqrt(mean((fo2-f2).^2));
+    rmse1 = norm(fo1-f1)/norm(f1);
+    rmse2 = norm(fo2-f2)/norm(f2);
 end
 
 
