@@ -36,6 +36,164 @@ Here, x-axis has the factor k. Where $\sigma = k \times avg(f_1+f_2)$
 
 
 
+### Q3
+
+Note: $D_i$ is the $i^{th}$ column of dictionary $D$
+
+- Derivative filter is applied via convolution of an image $I$ with a derivation kernel.
+
+  $\hat I = K \ast I,$ we use vectorized $I$  for our dictionary representation .
+
+  This convolution can be represented by a matrix $A$ ,s.t., $vec(\hat I) = A.vec(I)$ 
+
+  $vec(I) = DS \Rightarrow A.vec(I)=ADS$
+
+  $AD = [AD_1 | AD_2|...|AD_n]$
+
+  $\therefore\hat D = [AD_1 | AD_2|...|AD_n]$
+
+  So our new dictionary $\hat D$ is obtained by applying the same derivative filter on the columns of the old dictionary $D$.
+
+- Rotating an image means re-positioning the cells of that image.
+
+  So a rotated version of a vectorized image $I$ can be computed by multiplying it by a certain matrix, rotated$(I) = \hat I = RI,$ where each row and column in $R$ have at most 1 non-zero element whose value is 1.
+
+  Rotation by $\alpha$ can be denoted as $I_\alpha = R_\alpha I,$ similarly rotation by $\beta$ can be denoted as $I_\beta = R_\beta I$
+
+  $I = DS$
+
+  $I_\alpha = R_\alpha I = R_\alpha DS$
+
+   $R_\alpha D = [R_\alpha D_1 | R_\alpha D_2|...|R_\alpha D_n]$
+
+  $\therefore D^\alpha = [R_\alpha D_1 | R_\alpha D_2|...|R_\alpha D_n]$
+
+  Similarly, $D^\beta = [R_\beta D_1 | R_\beta D_2|...|R_\beta D_n]$
+
+  As some images are rotated by $\alpha$ while some by $\beta,$ we need both $D^\alpha$ and $D^\beta$.
+
+  $\therefore \hat D = [D^\alpha | D^\beta]$
+
+  So our new dictionary $\hat D$ is obtained by column concatenation of two dictionaries which are obtained by rotating each column of the old dictionary $D$ (considering it as an image) by $\alpha$ and by $\beta$ respectively.
+
+- $I_{new}^{i}(x,y)=\alpha(I^i_{old}(x,y))^2+\beta(I^i_{old}(x,y))+\gamma$
+
+  Let the vectorized form of our image be $X$.
+
+  $X=DS$
+
+  $X_i=D^i.S,$ where $D^i$ is the $i^{th}$ row of $D$.
+
+  $X_i^2=(\sum_jD_{ji}S_j)^2$
+
+  $X_i^2=\sum_jD_{ji}^2S_j^2+2\sum_{x,y,x>y}D_{xi}D_{yi}S_xS_y$
+
+  $\therefore$ Dictionary $D^{sq}$ for squared signal:
+
+  ​	$D^{sq}=[D^s|D^q],$ where 
+
+  ​		$D^s=[D_1^2|D_2^2|...|D_n^2],$ $D_i^2$ is the column vector obtained by squaring elements of $D_i$ 
+
+  ​		$D^q=2[D_1D_2|D_1D_3|...|D1D_n|D_2D_3|D_2D_4|...|D_2D_n|...|D_{n-1}D_n],$ 
+
+  ​						$D_iD_j$ is the column vector obtained by element wise product of $D_i$ and $D_j$
+
+  $aX+b = aDS+b$
+
+  $aDS+b=[aD|b\textbf{1}]S^{'},$ $\bf 1$ is the column vector with every element being 1 and $S^{'}$ is $S$ row concatenated with 1.
+
+  $\therefore$ Our new Dictionary $\hat D$ is:
+
+  $\hat D=[\alpha D^{sq}|\beta D|\gamma\textbf{1}]$
+
+- A blur kernel is applied to the image, so as seen in the first part to obtain the new dictionary $\hat D$ we have to apply the same blur kernel to the columns of the old dictionary $D$.
+
+- $I$ is our image on which convolution is to be applied
+
+  $I^{'}=K\ast I, K=\sum_i\alpha_iK_i, K_i$ is the $i^{th}$ kernel in the set 
+
+  $K\ast I=\sum_i\alpha_iK_i\ast I$
+
+  $X$ is the vectorized form of $I$
+
+  $vec(K_i\ast I)=A^i.X,$ for some matrix $A^i$
+
+  $X=DS$
+
+  $A^i.X=A^i.DS$  
+
+  $A^iD=[A^iD_1|A^iD_2|...|A^iD_n]$
+
+  $D^i=A^iD$
+
+  $\sum_i\alpha_iK_i\ast I=\sum_i\alpha_iA^iX=\sum_i\alpha_iA^iDS=\sum_i\alpha_iD^iS$
+
+  $\sum_i\alpha_iD^iS=\sum_iD^i(\alpha_iS)$
+
+  $\therefore vec(I^{'})=\sum_iD^i(\alpha_iS)$
+
+  $\therefore \hat D=[D^1|D^2|...|D^C],$ where $C$ is the cardinality of the set of kernels
+
+  So our new Dictionary $\hat D$ is concatenation of dictionaries each obtained as described in the previous part for each kernel in the set. 
+
+
+
+### Q4
+
+- The solution to the following optimization problem:
+  $$
+  \min_{A_r} ||A-A_r||_F^2 \text{ where rank} (A_r)=r,r\le \min(m,n),A \in \R^{m \times n}
+  $$
+  is given using SVD of $A$ as follows:
+  $$
+  A_r = \sum_{i=1}^{r}S_{ii}u_iv_i^t, \text{ where } A= USV^T
+  $$
+
+  - This optimization problem occurs in Image Compression.
+
+  - Instead of storing $mn$ intensity values, we store $(n+m+1)r$ intensity values where $r$ is the number of stored singular values (or singular vectors). The remaining m-r singular values (and hence their singular vectors) are effectively set to 0.
+
+  - This is called as storing a low-rank (rank $r$) approximation for an image.
+
+  - SVD gives the best possible rank-$r$ approximation of any matrix.
+
+    
+
+- $$
+  R^* = \min_R||A-RB|| \text{ s.t. } R^TR=I \text{ //R is orthonormal}\\
+  \min_R||A-RB||_F^2 = \min_A trace((A-RB)^T(A-RB))\\
+  = \min_R trace(A^TA-2A^TRB+B^TB)\\
+  =\max_R trace(A^TRB)\\
+  =\max_R trace(RBA^T) \text{ //trace(FG)=trace(GF)}\\
+  \text{--Let }BA^T=Q\text{, SVD of } Q \text{ gives } Q=UDV^T\\
+  =\max_R trace(RUDV^T)\\
+  =\max_R trace(V^TRUD)\\
+  =\max_R trace(Z(R)D) \text{ where } Z(R)=V^TRU\\
+  =\max_R\sum_i z_{ii}d_{ii} \le \sum_i d_{ii} \text{ //}Z(R)^TZ(R)=I\\
+  \text{The maximum is achieved for Z(R)=I,i.e,}\\
+  V^TRU=I \Rightarrow R=VU^T
+  $$
+
+  
+
+  - This optimization problem arises in Bases learning using Union of Ortho-normal Bases.
+
+  - We represent a signal in the following way:
+    $$
+    X=AS+\epsilon\\
+    (A,S) = \min_{A,S} ||X-AS||^2+\lambda ||S||_1
+    $$
+
+  - A is an over-complete dictionary, which is assumed to be a union of ortho-normal bases, in the form
+    $$
+    A=[A_1|A_2|...|A_M]\\
+    \forall i,1\le i\le M, A_iA_i^T=I
+    $$
+
+  - This application of SVD is called orthogonal Procrustes problem.
+
+  
+
 ### Q5
 
 <ins>Hyperspectral Unmixing</ins> is a procedure that decomposes the measured pixel spectrum of hyperspectral data into a collection of constituent spectral signals and a set of corresponding fractional abundances.
