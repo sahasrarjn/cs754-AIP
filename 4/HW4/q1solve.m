@@ -17,7 +17,7 @@ function [fo1, fo2, rmse1, rmse2] = q1solve(n,spar,k,eps, sigma_k)
     
     % Generating noise
     sigma = sigma_k*mean(f1+f2,'all');
-    gm = gmdistribution(0,sigma);
+    gm = gmdistribution(0,abs(sigma));
     eta = random(gm,n);
     
     

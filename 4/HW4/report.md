@@ -14,7 +14,7 @@
 
 **Varying $\sigma$ and fixed sparsity: **
 
-Here, x-axis has the factor k. Where $\sigma = k \times avg(f_1+f_2)$
+Here, x-axis has the factor $\tau$. Where $\sigma = \tau \times avg(f_1+f_2)$
 
 <img src="images/image1.png" style="zoom:40%;"/>
 
@@ -33,6 +33,80 @@ Here, x-axis has the factor k. Where $\sigma = k \times avg(f_1+f_2)$
 
 
 ### Q2
+
+Paper: [CoSaMP: Iterative signal recovery from incomplete and inaccurate samples](https://arxiv.org/abs/0803.2392)
+
+Author: [D. Needell](https://arxiv.org/search/math?searchtype=author&query=Needell%2C+D), [J. A. Tropp](https://arxiv.org/search/math?searchtype=author&query=Tropp%2C+J+A)
+
+Journal reference: Appl. Comput. Harmon. Anal., Vol. 26, pp. 301-321, 2008
+
+
+
+#### Algorithm 
+
+-----
+
+**CoSaMP($\Phi, u, s$)**
+
+**Input**: Sampling matrix $\phi$, noisy sample vector $u$, sparsity level $s$.
+
+**Output**: An s-sparse approximation $a$ of the target signal
+
+1. $a^0 \gets 0\\$                                                        // Initial approximation
+
+2. $v \gets u\\$                                                         // Current samples = input samples
+
+3. $k \gets 0\\$
+
+4. **repeat**
+
+   1. $k \gets k + 1$
+   2. $y \gets \Phi^*v$ 											// Form signal proxy
+   3. $\Omega \gets supp(y_{2s})$ 				                // Identify large components
+   4. $T \gets \Omega \cup supp(a^{k-1})$			           // Merge supports
+   5. $b|_T \gets \Phi^\dagger_T u$					                    // Signal estimation by least-squares
+   6. $b|_{T^c} \gets 0$
+   7. $a \gets b_s$												// Prune to obtain next approx
+   8. $v \gets u - \Phi a^k$								     // Update current samples
+
+   **until** haling criterion *true*
+
+-----
+
+
+
+<u>Def.</u> *quasi-norm*: 
+$$
+||x||_0 = |supp(x)| = |\{j : x_j \neq 0\}|
+$$
+<u>Def.</u> 
+$$
+x|_T = x_i\ \text{if}\ i \in T \ \text{else}\ 0
+$$
+$x|_T$ Is treated as an element of the vector space $\C^T$. And the restriction $\Phi_T$ of the sampling matrix $\Phi$ is defined as the column sub matrix whose columns are listed in the set $T$.
+
+<u>Def.</u> Pseudo inverse:
+$$
+A^\dagger = (A^* A)^{-1} A^*
+$$
+
+
+
+**CoSaMP** uses an approach inspired by the restricted isometry property. The sampling matrix $\bold \Phi$ has restricted isometry constant $\delta_s \ll 1$. For an s-sparse signal $x$, the vector $\bold{y = \Phi^*\Phi x}$ serves as a proxy for the signal because the energy in each set of s components of **y** approximates the energy in the corresponding s components of x. In particular, the largest s entries of the proxy y point toward the largest s entries of the signal x. Since the samples have the form $\bold{u= \Phi x}$, we can obtain the proxy just by applying the matrix $\Phi^*$ to the samples.
+
+
+
+
+
+-----
+
+**Theorem:** (CoSaMP). *Suppose that $\Phi$ is an $m \times N$ sampling matrix with RIC $\delta_{2s} \leq c$. Let $\bold{u = \Phi x + e}$ be a vector of samples of an arbitrary signal, contaminated with arbitrary noise. For a given precision parameter $\eta$, the algorithm* CoSaMP *produces a 2s-sparse approximation **a** that satisfies*
+$$
+||\bold x - \bold a||_2 \leq C \cdot \text{max} \bigg \{\eta, \frac{1}{\sqrt {s}} || \bold{x - x_s}||_1 + ||\bold e||_2 \bigg\}
+$$
+*Where $\bold{x_s}$ is a best s-sparse approximation to $\bold x$. The running time is $\mathcal{O}(\mathscr L \cdot \log(||\bold x||_2/\eta))$, where $\mathscr L$ bound the cost of a matrix-vector multiply with $\bold \Phi$ or* $\bold \Phi^*$ *The working storage use is $\mathcal{O}(N)$*
+
+-----
 
 
 
