@@ -4,7 +4,7 @@ close all; clear; clc;
 k = 1;
 n = 256;
 spar = 16;
-eps = [1e3 1e2 1 1e-1 1e-2 1e-3 1e-4 1e-5 1e-6];
+eps = [1e3 1e2 1 1e-1 1e-2 1e-3 1e-4 1e-5];
 sigma=0.01;
 
 for e=eps
@@ -22,8 +22,7 @@ k=1;
 n=256;
 spar=10;
 eps = 1e-3;
-sigma=[0.0001, 0.0005, 0.001, 0.005, 0.01, 0.02];
-% sigma = 0.01:0.01:1;
+sigma = 0.01:0.01:0.5;
 rmse = zeros(6,2);
 
 i = 1;
@@ -37,16 +36,16 @@ end
 plot(rmse);
 title('Varying sigma, Fixed sparsity (=10)');
 legend('RMSE for F1', 'RMSE for F2', 'location', 'northwest');
-xticks([1 2 3 4 5 6]);
-xticklabels({'0.0001','0.0005','0.001','0.005','0.01','0.02'});
+xlabel("\times avg(f_1 + f_2) \rightarrow");
+ylabel("RMSE \rightarrow");
 saveas(gcf,'image1.png','png');
 
 
 %% (b) Varying \sigma fixed sparsity
 k=1;
 n=256;
-spar=[5, 10, 15, 20, 30, 50];
-% spar = 5:1:30;
+% spar=[5, 10, 15, 20, 30, 50];
+spar = 5:1:50;
 sigma=0.01;
 eps = 1e-3;
 rmse = zeros(6,2);
@@ -62,14 +61,14 @@ end
 plot(rmse);
 title('Varying sparsity, Fixed sigma (0.01 \times avg(f1+f2))');
 legend('RMSE for F1', 'RMSE for F2', 'location', 'northwest');
-xticks([1 2 3 4 5 6]);
-xticklabels({'5','10','15','20','30','50'});
+xlabel("Sparsity \rightarrow")
+ylabel("RMSE \rightarrow");
 saveas(gcf,'image2.png','png');
 
 
 
 %% (b) Varying k
-k=[0.5, 1, 5, 10, 50, 100];
+k = logspace(-2,2);
 n=256;
 spar=10;
 eps = 1e-3;
@@ -84,11 +83,9 @@ for s=k
     i = i+1;
 end
 
-plot(rmse);
+semilogx(k,rmse);
 title('Varying k (sigma = 0.01 \times avg(f1+f2), sparsity = 10)');
 legend('RMSE for F1', 'RMSE for F2', 'location', 'northwest');
-xticks([1 2 3 4 5 6]);
-xticklabels({'0.5','1','5','10','50','100'});
+ylabel("RMSE \rightarrow");
+xlabel("k \rightarrow")
 saveas(gcf,'image3.png','png');
-
-close all;
