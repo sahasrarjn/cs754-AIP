@@ -21,28 +21,34 @@ function [mov, fields, accepted] = yuv4mpeg2mov(File)
 
     filep = dir(File); 
     fileBytes = filep.bytes; %Filesize
+    %disp(fileBytes);
     clear filep;
     
 	inFileId = fopen(File, 'r');
     
 	[header, endOfHeaderPos] = textscan(inFileId, '%s', 1, 'delimiter', '\n');
-
+    %disp(endOfHeaderPos);
+    
     [fields, accepted] = readYuv4MpegHeader(header);
+    %disp(fields.frameCount);
+    %disp(fields.height);
     fields.frameCount = 0;
     
 	frameLength = fields.width * fields.height;
     fwidth = 0.5;
     fheight= 0.5;
     
-    if strcmp(fields.colourSpace, 'C420')
+    %disp(fields.colourSpace);
+    
+    if startsWith(fields.colourSpace, 'C420')
 		frameLength = (frameLength * 3) / 2;
         fwidth = 0.5;
         fheight= 0.5;
-	elseif strcmp(fields.colourSpace, 'C422')
+	elseif startsWith(fields.colourSpace, 'C422')
 		frameLength = (frameLength * 2);
         fwidth = 0.5;
         fheight= 1;
-	elseif strcmp(fields.colourSpace, 'C444')
+	elseif startsWith(fields.colourSpace, 'C444')
 		frameLength = (frameLength * 3);
         fwidth = 1;
         fheight= 1;
@@ -53,8 +59,10 @@ function [mov, fields, accepted] = yuv4mpeg2mov(File)
     % Assume no parameters
     frameCount = (fileBytes - endOfHeaderPos)/(6 + frameLength);
     
+    %disp(frameCount);
+    
     if mod(frameCount,1) ~= 0
-        display('Error: wrong resolution, format or filesize');
+        disp('Error: wrong resolution, format or filesize');
         accepted = false;
     else
         fields.frameCount = frameCount;
