@@ -1,3 +1,11 @@
+# CS754 HW5
+
+## Rahul Prajapat (190050095)
+
+## Sahasra Ranjan (190050102)
+
+
+
 ### 1
 
 **(a)** Eq 6 given in the paper:
