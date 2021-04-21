@@ -1,9 +1,9 @@
 close all; clc; clear;
 
-addpath('utils/Adaptive-Median-Filter');
-addpath('utils/BlockMatchingAlgoMPEG/BlockMatchingAlgoMPEG');
-addpath('utils/addNoise');
-addpath('utils');
+addpath('helper/Adaptive-Median-Filter');
+addpath('helper/BlockMatchingAlgoMPEG/BlockMatchingAlgoMPEG');
+addpath('helper/addNoise');
+addpath('helper');
 
 mov = yuv4mpeg2mov('../data/subset2-y4m/Kunts_04.y4m');
 
