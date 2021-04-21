@@ -1,8 +1,9 @@
 close all; clc; clear;
 
-addpath('helper/Adaptive-Median-Filter');
-addpath('helper/BlockMatchingAlgoMPEG/BlockMatchingAlgoMPEG');
-addpath('helper/addNoise');
+addpath('utils/Adaptive-Median-Filter');
+addpath('utils/BlockMatchingAlgoMPEG/BlockMatchingAlgoMPEG');
+addpath('utils/addNoise');
+addpath('utils');
 
 mov = yuv4mpeg2mov('../data/subset2-y4m/Kunts_04.y4m');
 
@@ -13,6 +14,7 @@ noiseRate = 0.2;
 quantization_level_num = 10;
 
 
+% Adding noise to the image sequence
 for i = 1:nFrames
     old = I(:,:,i);
     old2 = old;
@@ -37,17 +39,13 @@ for i = 1:nFrames
     % Uniform noise (this is quantization noise!!)
 	% I(:,:,i) = addnoise(I(:,:,i),noiseRate*100);
     
-    imshowpair(old,I(:,:,i),'montage') 
+    imshowpair(old,I(:,:,i),'montage')  
     pause();
     clear old old2
 end 
 
+AdaptiveFilter(I(:,:,3),13);
 
-
-
-
-
+pause();
 close all;
-
-
 
