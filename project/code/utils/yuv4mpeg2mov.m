@@ -79,6 +79,7 @@ function [mov, fields, accepted] = yuv4mpeg2mov(File)
             YUV = readYUVFrame(data,fields.width, fields.height,...
                 fheight, fwidth);
             RGB = ycbcr2rgb(YUV); %Convert YUV to RGB
+            imshow(RGB)
             mov(framenumber).cdata = RGB;
             mov(framenumber).colormap = [];
         end

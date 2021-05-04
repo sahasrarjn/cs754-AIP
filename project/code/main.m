@@ -1,51 +1,62 @@
 close all; clc; clear;
 
-addpath('helper/Adaptive-Median-Filter');
-addpath('helper/BlockMatchingAlgoMPEG/BlockMatchingAlgoMPEG');
-addpath('helper/addNoise');
-addpath('helper');
+addpath('utils/Adaptive-Median-Filter');
+addpath('utils/BlockMatchingAlgoMPEG/BlockMatchingAlgoMPEG');
+addpath('utils/addNoise');
+addpath('utils');
 
-mov = yuv4mpeg2mov('../data/subset2-y4m/Kunts_04.y4m');
+% mov = yuv4mpeg2mov('../data/subset2-y4m/Kunts_04.y4m');
+vid = VideoReader('../data/out.mp4');
 
-I = mov.cdata;
+I = uint8(zeros([vid.Height, vid.Width, 3, vid.NumFrames]));
+
+tic
+i=1;
+while hasFrame(vid)
+    I(:,:,:,i) = readFrame(vid);
+%     imshow(I(:,:,:,i));
+%     pause(1/vid.FrameRate);
+    i = i+1;
+end
+close all;
+toc
+
     
-nFrames = size(I,3);
-noiseRate = 0.2;
+nFrames = size(I,4);
+noiseRate = 0.15;
 quantization_level_num = 10;
 
-
 % Adding noise to the image sequence
-for i = 1:nFrames
-    old = I(:,:,i);
+for i = 1:10
+    old = I(:,:,:,i);
     old2 = old;
     
-    % Quantization noise
-    thresh = multithresh(old2,quantization_level_num);
-    valuesMax = [thresh max(old2(:))];
-    [I(:,:,i), index] = imquantize(old2,thresh,valuesMax);
-    
-    % Fixed pattern noise
-    I(:,:,i) = imnoise(I(:,:,i),'gaussian',noiseRate);
-    
-    % Impulsive (salt and pepper) noise 
-    I(:,:,i) = imnoise(I(:,:,i),'salt & pepper',noiseRate);
+    for c = 1:3
+        % Quantization noise
+        temp = old2(:,:,c);
+        thresh = multithresh(temp,quantization_level_num);
+        valuesMax = [thresh max(temp(:))];
+        [I(:,:,c,i), index] = imquantize(temp,thresh,valuesMax);
 
-    % Poisson (photon shot) noise
-    I(:,:,i) = imnoise(I(:,:,i),'poisson');
+        % Fixed pattern noise
+        I(:,:,c,i) = imnoise(I(:,:,c,i),'gaussian',noiseRate);
+
+        % Impulsive (salt and pepper) noise 
+        I(:,:,c,i) = imnoise(I(:,:,c,i),'salt & pepper',noiseRate);
+
+        % Poisson (photon shot) noise
+        I(:,:,c,i) = imnoise(I(:,:,c,i),'poisson');
+
+        % Amplifier noise
+        % ????
+
+        % Uniform noise (this is quantization noise!!)
+        % I(:,:,i) = addnoise(I(:,:,i),noiseRate*100);
+    end
     
-    % Amplifier noise
-    % ????
-    
-    % Uniform noise (this is quantization noise!!)
-	% I(:,:,i) = addnoise(I(:,:,i),noiseRate*100);
-    
-    imshowpair(old,I(:,:,i),'montage')  
-    pause();
-    clear old old2
+    if i==1
+        imshowpair(old,I(:,:,:,i),'montage')  
+    %     pause();
+    end
 end 
-
-AdaptiveFilter(I(:,:,3),13);
-
-pause();
-close all;
 
