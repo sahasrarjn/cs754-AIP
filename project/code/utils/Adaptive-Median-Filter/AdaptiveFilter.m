@@ -15,8 +15,6 @@ imag=MedianFilter(MaxSizeFilter);
  
 Q=MaxSizeFilter-ceil(MaxSizeFilter/2);%cut image
 imag=imag(Q:Q+x-1,Q:Q+y-1);
-figure();
-imshow(uint8(imag),[]);
 out=imag;
 end
 function output=MedianFilter(MaxSizeFilter)% x: row number and y: col number

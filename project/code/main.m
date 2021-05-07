@@ -4,6 +4,7 @@ addpath('utils/Adaptive-Median-Filter');
 addpath('utils/AdaptiveMedianFilter');
 addpath('utils/BlockMatchingAlgoMPEG/BlockMatchingAlgoMPEG');
 addpath('utils/addNoise');
+addpath('utils/denoise');
 addpath('utils');
 
 % mov = yuv4mpeg2mov('../data/subset2-y4m/Kunts_04.y4m');
@@ -56,12 +57,18 @@ for i = 1:10
     end
 end 
 
-I1 = I(:,:,1,1);
+I2 = I(:,:,:,1);
 
-[sigma, I2] = AdaptiveMedianFilter(I1);
+for i = 1:3
+    I1 = I(:,:,i,1);
+%     [sigma, I2(:,:,i,1)] = AdaptiveMedianFilter(I1);
+%     I2(:,:,i,1) = AdaptiveFilter(I1,150);
+    I2(:,:,i,1) = medfilt2(I1);
+end
 
+% I2 = denoise(sigma,I2);
 
-imshowpair(I1,I2,'montage');
+imshowpair(I(:,:,:,1),I2,'montage');
 
 
 
