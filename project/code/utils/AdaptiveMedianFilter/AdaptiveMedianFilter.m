@@ -1,8 +1,8 @@
 
 
-function [sigma,ModImg]=AdaptiveMedianFilter(img)
+function [omega,ModImg]=AdaptiveMedianFilter(img)
     dim = size(img);
-    sigma=zeros(dim)+1;
+    omega=zeros(dim)+1;
     ModImg=img;
 
     for i=1:dim(1)
@@ -10,7 +10,7 @@ function [sigma,ModImg]=AdaptiveMedianFilter(img)
             val=FirstStage(img,i,j,1);
             if val~=img(i,j)
                 ModImg(i,j)=val;
-                sigma(i,j)=0;
+                omega(i,j)=0;
             end
         end
     end
