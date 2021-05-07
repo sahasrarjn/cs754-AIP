@@ -1,0 +1,16 @@
+﻿  blockMatching.cpp
+blockMatching.cpp(2): fatal error C1083: 포함 파일을 열 수 없습니다. 'opencv2/core.hpp': No such file or directory
+  BMA_3step.cpp
+BMA_3step.cpp(2): fatal error C1083: 포함 파일을 열 수 없습니다. 'opencv2/core.hpp': No such file or directory
+  bma_reconstruction.cpp
+bma_reconstruction.cpp(2): fatal error C1083: 포함 파일을 열 수 없습니다. 'opencv2/core.hpp': No such file or directory
+  cvDrawQuiver.cpp
+cvDrawQuiver.cpp(2): fatal error C1083: 포함 파일을 열 수 없습니다. 'opencv2/core.hpp': No such file or directory
+  display_img_info.cpp
+display_img_info.cpp(2): fatal error C1083: 포함 파일을 열 수 없습니다. 'opencv2/core.hpp': No such file or directory
+  get_diff.cpp
+get_diff.cpp(2): fatal error C1083: 포함 파일을 열 수 없습니다. 'opencv2/core.hpp': No such file or directory
+  main.cpp
+main.cpp(6): fatal error C1083: 포함 파일을 열 수 없습니다. 'opencv2/core.hpp': No such file or directory
+  matching_MSE.cpp
+matching_MSE.cpp(2): fatal error C1083: 포함 파일을 열 수 없습니다. 'opencv2/core.hpp': No such file or directory

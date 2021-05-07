@@ -1,6 +1,7 @@
 close all; clc; clear;
 
 addpath('utils/Adaptive-Median-Filter');
+addpath('utils/AdaptiveMedianFilter');
 addpath('utils/BlockMatchingAlgoMPEG/BlockMatchingAlgoMPEG');
 addpath('utils/addNoise');
 addpath('utils');
@@ -53,10 +54,16 @@ for i = 1:10
         % Uniform noise (this is quantization noise!!)
         % I(:,:,i) = addnoise(I(:,:,i),noiseRate*100);
     end
-    
-    if i==1
-        imshowpair(old,I(:,:,:,i),'montage')  
-    %     pause();
-    end
 end 
+
+I1 = I(:,:,1,1);
+
+[sigma, I2] = AdaptiveMedianFilter(I1);
+
+
+imshowpair(I1,I2,'montage');
+
+
+
+
 

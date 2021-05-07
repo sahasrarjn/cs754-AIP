@@ -1,4 +1,4 @@
-function AdaptiveFilter(image,MaxSizeFilter)
+function out=AdaptiveFilter(image,MaxSizeFilter)
 %         AdaptiveFilter(image,MaxSizeFilter)
 %                 remove noise by changing the size of filter
 %                 image : tasvir noisy
@@ -17,6 +17,7 @@ Q=MaxSizeFilter-ceil(MaxSizeFilter/2);%cut image
 imag=imag(Q:Q+x-1,Q:Q+y-1);
 figure();
 imshow(uint8(imag),[]);
+out=imag;
 end
 function output=MedianFilter(MaxSizeFilter)% x: row number and y: col number
 global imag;
