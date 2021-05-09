@@ -1,5 +1,4 @@
 function mapping = blockMatching(I1, I2, mb)
-	% Make sure to give square image as input
 	% mb: size of block
 
 	% mapping(x,y) will return x',y' of the similar patch in I2
@@ -15,14 +14,13 @@ function mapping = blockMatching(I1, I2, mb)
 
 	mapping = zeros(row,col,2);
 
-	N = size(I2,1);
 	pos = [0 -1 0 1 0; -1 0 0 0 1];
 	cnt = 0
 
 	for i = 1 : mb : row-mb+1
 		for j = 1 : mb : col-mb+1
 
-			S = 2*N-1; % step size
+			S = min(row,col)/2; % step size
 
 			% ox = size(I1,1)/2;
 			% oy = size(I1,2)/2;
