@@ -20,7 +20,7 @@ function mapping = blockMatching(I1, I2, mb)
 	for i = 1 : mb : row-mb+1
 		for j = 1 : mb : col-mb+1
 
-			S = min(row,col)/2; % step size
+			S = 2*mb-1; % step size
 
 			% ox = size(I1,1)/2;
 			% oy = size(I1,2)/2;
@@ -29,8 +29,8 @@ function mapping = blockMatching(I1, I2, mb)
 
 			while S>1
 				minSAD = intmax('double');
-				minX = 0;
-				minY = 0;
+				minX = ox;
+				minY = oy;
 
 				% Can be further optimised if we store the SAD value of origin from the previous run
 				for t = 1:5
