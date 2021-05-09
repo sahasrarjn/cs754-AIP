@@ -3,7 +3,7 @@
 % Mr. Rahul Bhandari, Mr. Ashutosh Vyas
 
 
-function cost = costfnMAD(I1, I2, n)
+function cost = costfnSAD(I1, I2, n)
 	err=0;
 	for i = 1:n
 		for j = 1:n
