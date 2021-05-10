@@ -42,13 +42,7 @@ function mapping = blockMatching(I1, I2, mb)
 						continue;
 					end
 					
-					% compute SAD
-%                     size(I1(i:i+mb-1, j:j+mb-1))
-%                     size(I2(x:x+mb-1, y:y+mb-1))
-%                     fprintf("y is: %d\n",y);
-%                     fprintf("mb-1 is: %d\n",mb-1);
-%                     fprintf("y+mb-1 is: %d\n",y+mb-1);
-                    
+					% compute SAD            
 					sad = costfnSAD(I1(i:i+(mb-1), j:j+(mb-1)), I2(x:x+(mb-1), y:y+(mb-1)), mb);
 
 					if sad < minSAD 

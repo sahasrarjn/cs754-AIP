@@ -16,9 +16,9 @@ function Q=denoise(omega, P)
     mu=(sqrt(n1)+sqrt(n2))*sqrt(p)*v;
     
     tau=1.5;
-    epsilon=1e-5;
+    epsilon=1e-3;
     
-    for i=1:15
+    for i=1:5
         R = Q - tau*omega.*(Q-P);
         [U,D,V] = svd(R);
         D = max(D-tau*mu,0);

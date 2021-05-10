@@ -57,7 +57,7 @@ mb = 8;
 frameStep = 1;
 
 
-Reconstructed = zeros(size(Img));
+Reconstructed = zeros(size(Img),'uint8');
 Scaling = Reconstructed;
 
 %% loop
@@ -128,22 +128,18 @@ for c=1:3
                 % Updating Omega to somewhat include remaining errors of the patch
                 Q = denoise(omg,P);
 %                 Q = P;
-%                 
-%                 imshow(reshape(P(:,3), [mb, mb]));
-%                 pause();
-%                 imshow(reshape(Q(:,3), [mb, mb]));
-%                 pause();
+
                 
 
                 for kk=1:K
                     if(kk==k)
-                        Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) = Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) + reshape(Q(:,kk),[mb, mb]);
+                        Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) = Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) + uint8(reshape(Q(:,kk),[mb, mb]));
                         Scaling(i:i+(mb-1), j:j+(mb-1), c, k) = Scaling(i:i+(mb-1), j:j+(mb-1), c, k) + 1;
                         continue
                     end
                         x = Mappings(i,j,kk,1);
                         y = Mappings(i,j,kk,2);
-                        Reconstructed(x:x+(mb-1), y:y+(mb-1), c, kk) = Reconstructed(x:x+(mb-1), y:y+(mb-1), c, kk) + reshape(Q(:,kk),[mb, mb]);
+                        Reconstructed(x:x+(mb-1), y:y+(mb-1), c, kk) = Reconstructed(x:x+(mb-1), y:y+(mb-1), c, kk) + uint8(reshape(Q(:,kk),[mb, mb]));
                         Scaling(x:x+(mb-1), y:y+(mb-1), c, k) = Scaling(x:x+(mb-1), y:y+(mb-1), c, k) + 1;
                 end
             end
