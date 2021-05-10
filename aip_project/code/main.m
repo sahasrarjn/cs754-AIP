@@ -2,25 +2,28 @@
 close all; clc; clear;
 vid = VideoReader('../data/out.mp4');
 
-I = uint8(zeros([vid.Height, vid.Width, 3, vid.NumFrames]));
+N = 128;
+
+%I = uint8(zeros([vid.Height, vid.Width, 3, vid.NumFrames]));
+I = uint8(zeros([N, N, 3, vid.NumFrames]));
 
 i=1;
 while hasFrame(vid)
-    I(:,:,:,i) = readFrame(vid);
+    Temp = readFrame(vid);
+    I(:,:,:,i) = imresize(Temp, [N,N]);
     i = i+1;
 end
-test_videoframes = 3; % for testing
+test_videoframes = 30; % for testing
 I2 = I(:,:,:,1:test_videoframes);
 clear I;
 I = I2;
 clear I2;
 
 
-% Adding noise
+%% Adding noise
 nFrames = size(I,4);
 noiseRate = 0.2;
 quantization_level_num = 10;
-N = 128;
 
 % Adding noise to the image sequence
 for i = 1:nFrames
@@ -45,23 +48,22 @@ for i = 1:nFrames
     end
 end 
 
-% Median Filter and Block Matching
+%% Median Filter and Block Matching
 Img = I;
 clear I;
 dim = size(Img);
 K = dim(4);
 mb = 8;
-frameStep = K;
+frameStep = 1;
 
 
 Reconstructed = zeros(size(Img));
 Scaling = Reconstructed;
 
-% for c=1%:3
-c=1;
+for c=1:3
+    
     I = reshape(Img(:,:,c,:), [dim(1),dim(2),dim(4)]); % Single channel image seq
     dim2 = size(I);
-    Im = zeros(dim2,'uint8');
     I2 = zeros([N,N,K], 'uint8');
     Omega = zeros(dim2,'double');
     
@@ -69,17 +71,14 @@ c=1;
     tic
     for k = 1:K
         [a, b] = AdaptiveMedianFilter(I(:,:,k)); % Adaptive Median filter
-        Im(:,:,k) = b;
+        I2(:,:,k) = b;
         Omega(:,:,k) = a;
-        x = imresize(Im(:,:,k),[N,N]);
-        I2(:,:,k) = x;
     end
     toc
 %%    
     
     clear I;
     I = I2;
-    clear Im;
     clear I2;
 
     % vec = zeros(N,N,K-1,2);
@@ -87,9 +86,9 @@ c=1;
 %% test
     dim2 = size(I);
     for k = 1:frameStep:K % check
- % for k = 1:1 
+        % for k = 1:1 
         % For each frame at frameSIze gap
-        
+
         %%%%%% Block Matching %%%%%
         Mappings = zeros([dim2(1),dim2(2),dim2(3),2]);
         % Block Mapping of frame k with all the frame
@@ -100,11 +99,10 @@ c=1;
             Mappings(:,:,kk,:) = blockMatching(I(:,:,k),I(:,:,kk),mb);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% test
+%% test
         %%%%%% Denoise and Reconstruction %%%%%
         for i = 1:mb:N
             for j = 1:mb:N
-                [i,j]
                 P = zeros(mb*mb,K);
                 omg = P;
                 for kk=1:K
@@ -125,7 +123,6 @@ c=1;
                 end
                 omg = UpdateOmega(P,omg);
                 % Updating Omega to somewhat include remaining errors of the patch
-    
 %                 Q = denoise(omg,P);
                 Q = P;
                 
@@ -145,9 +142,14 @@ c=1;
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     end
-% end
-
-
-Reconstructed = Reconstructed./Scaling; 
-
+ end
+%% test
+figure();
+imshow(Img(:,:,:,8));
+%figure();
+%[x,y] = AdaptiveMedianFilter(Img(:,:,1,1));
+%imshow(y);
+Reconstructed = Reconstructed./Scaling;
+figure();
+imshow(uint8(Reconstructed(:,:,:,8)));
 % Reconstructed video

@@ -7,6 +7,9 @@ function [omega,ModImg]=AdaptiveMedianFilter(img)
 
     for i=1:dim(1)
         for j=1:dim(2)
+            if img(i,j)~=0 && img(i,j)~=255 
+                continue
+            end
             val=FirstStage(img,i,j,1);
             if val~=img(i,j)
                 ModImg(i,j)=val;
