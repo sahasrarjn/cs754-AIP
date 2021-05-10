@@ -22,7 +22,7 @@ clear I2;
 
 %% Adding noise
 nFrames = size(I,4);
-noiseRate = 0.2;
+noiseRate = 0.1;
 quantization_level_num = 10;
 
 % Adding noise to the image sequence

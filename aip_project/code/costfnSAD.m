@@ -5,10 +5,12 @@
 
 function cost = costfnSAD(I1, I2, n)
 	err=0;
+    err = uint32(err);
 	dim = size(I1);
 	for i = 1:dim(1)
 		for j = 1:dim(2)
-			err = err + abs(I1(i,j) - I2(i,j));
+			err = err + uint32(abs(I1(i,j) - I2(i,j)));
 		end
-	end
-	cost = err;
+    end
+    n = uint32(n);
+	cost = err / n*n;
