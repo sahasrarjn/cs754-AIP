@@ -37,11 +37,11 @@ for i = 1:nFrames
         % Fixed pattern noise
         I(:,:,c,i) = imnoise(I(:,:,c,i),'gaussian',noiseRate);
 
-        % Impulsive (salt and pepper) noise 
-        I(:,:,c,i) = imnoise(I(:,:,c,i),'salt & pepper',noiseRate);
-
         % Poisson (photon shot) noise
         I(:,:,c,i) = imnoise(I(:,:,c,i),'poisson');
+
+        % Impulsive (salt and pepper) noise 
+        I(:,:,c,i) = imnoise(I(:,:,c,i),'salt & pepper',noiseRate);
     end
 end 
 
