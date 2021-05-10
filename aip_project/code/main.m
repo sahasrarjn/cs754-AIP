@@ -13,7 +13,7 @@ while hasFrame(vid)
     I(:,:,:,i) = imresize(Temp, [N,N]);
     i = i+1;
 end
-numFrames= 20; % for testing
+numFrames= 5; % for testing
 I2 = I(:,:,:,1:numFrames);
 clear I;
 I = I2;
@@ -104,6 +104,7 @@ for c=1:3
         %%%%%% Denoise and Reconstruction %%%%%
         for i = 1:mb:N
             for j = 1:mb:N
+%                 [i,j]
                 P = zeros(mb*mb,K);
                 omg = P;
                 for kk=1:K
@@ -126,7 +127,12 @@ for c=1:3
                 omg = UpdateOmega(P,omg);
                 % Updating Omega to somewhat include remaining errors of the patch
                 Q = denoise(omg,P);
-                % Q = P;
+%                 Q = P;
+%                 
+%                 imshow(reshape(P(:,3), [mb, mb]));
+%                 pause();
+%                 imshow(reshape(Q(:,3), [mb, mb]));
+%                 pause();
                 
 
                 for kk=1:K

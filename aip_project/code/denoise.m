@@ -23,7 +23,7 @@ function Q=denoise(omega, P)
         [U,D,V] = svd(R);
         D = max(D-tau*mu,0);
         Temp = U*D*V.';
-        if norm(Temp-Q) <= epsilon
+        if norm(Temp-Q, 'fro') <= epsilon
             Q = Temp;
             break;
         end
