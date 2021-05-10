@@ -18,7 +18,7 @@ function Q=denoise(omega, P)
     tau=1.5;
     epsilon=1e-5;
     
-    for i=1:30
+    for i=1:15
         R = Q - tau*omega.*(Q-P);
         [U,D,V] = svd(R);
         D = max(D-tau*mu,0);
@@ -27,5 +27,6 @@ function Q=denoise(omega, P)
             Q = Temp;
             break;
         end
+        Q = Temp;
     end
 end
