@@ -59,22 +59,16 @@ Scaling = Reconstructed;
 
 % for c=1%:3
 c=1;
-    imshow(Img(:,:,:,1));
-    pause();
     I = reshape(Img(:,:,c,:), [dim(1),dim(2),dim(4)]); % Single channel image seq
     dim2 = size(I);
     Im = zeros(dim2,'uint8');
     I2 = zeros([N,N,K], 'uint8');
     Omega = zeros(dim2,'double');
     
-    imshow(I(:,:,1));
-    size(I)
-    pause();
     % Median Filter
     tic
     for k = 1:K
         [a, b] = AdaptiveMedianFilter(I(:,:,k)); % Adaptive Median filter
-%         [Omega(:,:,k), Im(:,:,k)] = AdaptiveMedianFilter(I(:,:,k)); % Adaptive Median filter
         Im(:,:,k) = b;
         Omega(:,:,k) = a;
         x = imresize(Im(:,:,k),[N,N]);
@@ -110,6 +104,7 @@ c=1;
         %%%%%% Denoise and Reconstruction %%%%%
         for i = 1:mb:N
             for j = 1:mb:N
+                [i,j]
                 P = zeros(mb*mb,K);
                 omg = P;
                 for kk=1:K
@@ -130,7 +125,11 @@ c=1;
                 end
                 omg = UpdateOmega(P,omg);
                 % Updating Omega to somewhat include remaining errors of the patch
-                Q = denoise(omg,P);
+    
+%                 Q = denoise(omg,P);
+                Q = P;
+                
+
                 for kk=1:K
                     if(kk==k)
                         Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) = Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) + reshape(Q(:,kk),[mb, mb]);
