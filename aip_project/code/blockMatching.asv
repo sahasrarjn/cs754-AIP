@@ -16,9 +16,10 @@ function mapping = blockMatching(I1, I2, mb)
 	mapping = zeros(row,col,2);
 
 	pos = [0 -1 0 1 0; -1 0 0 0 1];
+	cnt = 0;
 
-	for i = 1 : mb : (row-mb)+1
-		for j = 1 : mb : (col-mb)+1
+	for i = 1 : mb : row-mb+1
+		for j = 1 : mb : col-mb+1
 
 			S = 2*mb-1; % step size
 
@@ -38,7 +39,7 @@ function mapping = blockMatching(I1, I2, mb)
 					x = ox + pos(1,t)*S;
 					y = oy + pos(2,t)*S;
 
-					if(x < 1 || x+(mb-1) > row || y < 1 || y+(mb-1) > col)
+					if(x < 1 || x+mb-1 > row || y < 1 || y+mb-1 > col)
 						continue;
 					end
 					
@@ -49,7 +50,7 @@ function mapping = blockMatching(I1, I2, mb)
 %                     fprintf("mb-1 is: %d\n",mb-1);
 %                     fprintf("y+mb-1 is: %d\n",y+mb-1);
                     
-					sad = costfnSAD(I1(i:i+(mb-1), j:j+(mb-1)), I2(x:x+(mb-1), y:y+(mb-1)), mb);
+					sad = costfnSAD(I1(i:i+mb-1, j:j+mb-1), I2(x:x+mb-1, y:y+mb-1), mb);
 
 					if sad < minSAD 
 						minSAD = sad;
@@ -70,11 +71,11 @@ function mapping = blockMatching(I1, I2, mb)
 					x = ox + ii;
 					y = oy + jj;
                     
-                    if(x < 1 || x+(mb-1) > row || y < 1 || y+(mb-1) > col)
+                    if(x < 1 || x+(mb-1 > row || y < 1 || y+mb-1 > col)
 						continue;
 					end
 
-					sad = costfnSAD(I1(i:i+(mb-1), j:j+(mb-1)), I2(x:x+(mb-1), y:y+(mb-1)), mb);
+					sad = costfnSAD(I1(i:i+mb-1, j:j+mb-1), I2(x:x+mb-1, y:y+mb-1), mb);
 
 					if sad < minSAD 
 						minSAD = sad;

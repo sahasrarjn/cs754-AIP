@@ -13,7 +13,7 @@ while hasFrame(vid)
     I(:,:,:,i) = imresize(Temp, [N,N]);
     i = i+1;
 end
-test_videoframes = 30; % for testing
+test_videoframes = 5; % for testing
 I2 = I(:,:,:,1:test_videoframes);
 clear I;
 I = I2;
@@ -75,7 +75,6 @@ for c=1:3
         Omega(:,:,k) = a;
     end
     toc
-%%    
     
     clear I;
     I = I2;
@@ -83,7 +82,6 @@ for c=1:3
 
     % vec = zeros(N,N,K-1,2);
 
-%% test
     dim2 = size(I);
     for k = 1:frameStep:K % check
         % for k = 1:1 
@@ -99,10 +97,11 @@ for c=1:3
             Mappings(:,:,kk,:) = blockMatching(I(:,:,k),I(:,:,kk),mb);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% test
+
         %%%%%% Denoise and Reconstruction %%%%%
         for i = 1:mb:N
             for j = 1:mb:N
+                [i,j,k]
                 P = zeros(mb*mb,K);
                 omg = P;
                 for kk=1:K
@@ -142,14 +141,13 @@ for c=1:3
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     end
- end
-%% test
-figure();
-imshow(Img(:,:,:,8));
-%figure();
-%[x,y] = AdaptiveMedianFilter(Img(:,:,1,1));
-%imshow(y);
+end
+
 Reconstructed = Reconstructed./Scaling;
-figure();
-imshow(uint8(Reconstructed(:,:,:,8)));
-% Reconstructed video
+
+%% imshow
+
+frame = 1;
+imshowpair(Img(:,:,:,frame), uint8(Reconstructed(:,:,:,frame)),'montage');
+
+
