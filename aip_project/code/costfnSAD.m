@@ -8,7 +8,7 @@ function cost = costfnSAD(I1, I2, n)
 	dim = size(I1);
 	for i = 1:dim(1)
 		for j = 1:dim(2)
-			err = err + abs(I1(i,j) - I2(i,j))
+			err = err + abs(I1(i,j) - I2(i,j));
 		end
 	end
 	cost = err;

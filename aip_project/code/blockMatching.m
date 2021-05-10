@@ -1,5 +1,6 @@
 function mapping = blockMatching(I1, I2, mb)
 	% mb: size of block
+    mb = uint8(mb);
 
 	% mapping(x,y) will return x',y' of the similar patch in I2
 	% (x,y) in I1 and (x',y') in I2 are similar
@@ -15,7 +16,7 @@ function mapping = blockMatching(I1, I2, mb)
 	mapping = zeros(row,col,2);
 
 	pos = [0 -1 0 1 0; -1 0 0 0 1];
-	cnt = 0
+	cnt = 0;
 
 	for i = 1 : mb : row-mb+1
 		for j = 1 : mb : col-mb+1
@@ -28,7 +29,8 @@ function mapping = blockMatching(I1, I2, mb)
 			oy = j;
 
 			while S>1
-				minSAD = intmax('double');
+                S = uint8(S);
+				minSAD = intmax('uint32');
 				minX = ox;
 				minY = oy;
 
@@ -42,8 +44,13 @@ function mapping = blockMatching(I1, I2, mb)
 					end
 					
 					% compute SAD
-					sad = costfnSAD(I1(i:i+mb-1, j:j+mb-1), ... 
-						I2(x:x+mb-1, y:y+mb-1), n);
+%                     size(I1(i:i+mb-1, j:j+mb-1))
+%                     size(I2(x:x+mb-1, y:y+mb-1))
+%                     fprintf("y is: %d\n",y);
+%                     fprintf("mb-1 is: %d\n",mb-1);
+%                     fprintf("y+mb-1 is: %d\n",y+mb-1);
+                    
+					sad = costfnSAD(I1(i:i+mb-1, j:j+mb-1), I2(x:x+mb-1, y:y+mb-1), mb);
 
 					if sad < minSAD 
 						minSAD = sad;
@@ -57,15 +64,18 @@ function mapping = blockMatching(I1, I2, mb)
 				S = S/2;
 			end 
 
-			minSAD = intmax('double');
+			minSAD = intmax('uint32');
 
 			for ii=-1:1
 				for jj=-1:1
 					x = ox + ii;
 					y = oy + jj;
+                    
+                    if(x < 1 || x+mb-1 > row || y < 1 || y+mb-1 > col)
+						continue;
+					end
 
-					sad = costfnSAD(I1(i:i+mb-1, j:j+mb-1), ... 
-						I2(x:x+mb-1, y:y+mb-1), n);
+					sad = costfnSAD(I1(i:i+mb-1, j:j+mb-1), I2(x:x+mb-1, y:y+mb-1), mb);
 
 					if sad < minSAD 
 						minSAD = sad;
