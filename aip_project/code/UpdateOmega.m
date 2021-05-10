@@ -1,9 +1,13 @@
 
 function updomega=UpdateOmega(M, omega)
-    var_vec=var(M,0,2);
-    s=sqrt(mean(var_vec));
+
+    P=omega.*M;
+    mn=sum(P,2)./sum(omega,2);
+    P=P-mn;
+    P=P.^2;
+    P=omega.*P;
+    v=sqrt(mean(sum(P,2)./sum(omega,2)));
     updomega=omega;
-    mean_vec=mean(M,2);
-    M=abs(M-mean_vec);
-    updomega(M>2*s)=0;
+    M=abs(M-mn);
+    updomega(M>2*v)=0;
 end
