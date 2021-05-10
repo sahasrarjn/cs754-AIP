@@ -1,6 +1,6 @@
 %% Reading the video file (mp4)
 close all; clc; clear;
-vid = VideoReader('../data/out.mp4');
+vid = VideoReader('../data/mp4/akiyo.mp4');
 
 N = 128;
 
@@ -13,8 +13,8 @@ while hasFrame(vid)
     I(:,:,:,i) = imresize(Temp, [N,N]);
     i = i+1;
 end
-test_videoframes = 5; % for testing
-I2 = I(:,:,:,1:test_videoframes);
+numFrames= 20; % for testing
+I2 = I(:,:,:,1:numFrames);
 clear I;
 I = I2;
 clear I2;
@@ -60,6 +60,7 @@ frameStep = 1;
 Reconstructed = zeros(size(Img));
 Scaling = Reconstructed;
 
+%% loop
 for c=1:3
     
     I = reshape(Img(:,:,c,:), [dim(1),dim(2),dim(4)]); % Single channel image seq
@@ -67,7 +68,7 @@ for c=1:3
     I2 = zeros([N,N,K], 'uint8');
     Omega = zeros(dim2,'double');
     
-    % Median Filter
+    % Median Filter  
     tic
     for k = 1:K
         [a, b] = AdaptiveMedianFilter(I(:,:,k)); % Adaptive Median filter
@@ -75,6 +76,7 @@ for c=1:3
         Omega(:,:,k) = a;
     end
     toc
+    
     
     clear I;
     I = I2;
@@ -84,6 +86,7 @@ for c=1:3
 
     dim2 = size(I);
     for k = 1:frameStep:K % check
+        k
         % for k = 1:1 
         % For each frame at frameSIze gap
 
@@ -101,7 +104,6 @@ for c=1:3
         %%%%%% Denoise and Reconstruction %%%%%
         for i = 1:mb:N
             for j = 1:mb:N
-                [i,j,k]
                 P = zeros(mb*mb,K);
                 omg = P;
                 for kk=1:K
@@ -122,7 +124,7 @@ for c=1:3
                 end
                 omg = UpdateOmega(P,omg);
                 % Updating Omega to somewhat include remaining errors of the patch
-%                 Q = denoise(omg,P);
+                % Q = denoise(omg,P);
                 Q = P;
                 
 
@@ -139,12 +141,12 @@ for c=1:3
                 end
             end
         end
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
     end
 end
 
 Reconstructed = Reconstructed./Scaling;
-
+save("akiyo.mat");
 %% imshow
 
 frame = 1;
