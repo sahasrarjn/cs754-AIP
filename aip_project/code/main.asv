@@ -63,9 +63,9 @@ c=1;
     pause();
     I = reshape(Img(:,:,c,:), [dim(1),dim(2),dim(4)]); % Single channel image seq
     dim2 = size(I);
-    Im = zeros(dim2,'uint8');
-    I2 = zeros([N,N,K], 'uint8');
-    Omega = zeros(dim2,'double');
+    Im = double(zeros(dim2));
+    I2 = double(zeros([N,N,K]));
+    Omega = double(zeros(dim2));
     
     imshow(I(:,:,1));
     size(I)
@@ -77,11 +77,16 @@ c=1;
 %         [Omega(:,:,k), Im(:,:,k)] = AdaptiveMedianFilter(I(:,:,k)); % Adaptive Median filter
         Im(:,:,k) = b;
         Omega(:,:,k) = a;
+        imshow(b);
+        pause;
+        imshow(Im(:,:,k));
+        class(b);
         x = imresize(Im(:,:,k),[N,N]);
         I2(:,:,k) = x;
     end
     toc
-%%    
+    
+    
     
     clear I;
     I = I2;
