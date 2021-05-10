@@ -54,6 +54,7 @@ K = dim(4);
 mb = 8;
 frameStep = K;
 
+
 Reconstructed = zeros(size(Img));
 Scaling = Reconstructed;
 %%
@@ -64,7 +65,7 @@ c = 1;
     Im = zeros(dim2);
     I2 = zeros([N,N,K]);
     Omega = zeros(dim2);
-
+    
     % Median Filter
     tic
     for k = 1:K
@@ -127,10 +128,10 @@ c = 1;
                     if(kk==k)
                         Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) = Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) + reshape(Q(:,kk),[mb, mb]);
                         Scaling(i:i+(mb-1), j:j+(mb-1), c, k) = Scaling(i:i+(mb-1), j:j+(mb-1), c, k) + 1;
+                        continue
                     end
                         x = Mappings(i,j,kk,1);
                         y = Mappings(i,j,kk,2);
-                        
                         Reconstructed(x:x+(mb-1), y:y+(mb-1), c, kk) = Reconstructed(x:x+(mb-1), y:y+(mb-1), c, kk) + reshape(Q(:,kk),[mb, mb]);
                         Scaling(x:x+(mb-1), y:y+(mb-1), c, k) = Scaling(x:x+(mb-1), y:y+(mb-1), c, k) + 1;
                 end
@@ -142,4 +143,5 @@ c = 1;
 
 
 Reconstructed = Reconstructed./Scaling; 
+
 % Reconstructed video
