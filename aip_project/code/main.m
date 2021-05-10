@@ -117,15 +117,16 @@ for c=1:3
                     x = Mappings(i,j,kk,1);
                     y = Mappings(i,j,kk,2);
                     % patch similar to i,j in kk_th framee
-                    P(:,kk) = reshape(I(x:x+(mb-1), j:j+(mb-1), kk), [mb*mb, 1]);
+                    P(:,kk) = reshape(I(x:x+(mb-1), y:y+(mb-1), kk), [mb*mb, 1]);
                     % Forming patch matrix
-                    omg(:,kk) = reshape(Omega(x:x+(mb-1), j:j+(mb-1), kk), [mb*mb, 1]);
+                    omg(:,kk) = reshape(Omega(x:x+(mb-1), y:y+(mb-1), kk), [mb*mb, 1]);
                     % Forming initial omega matrix using median filter errors
                 end
+                
                 omg = UpdateOmega(P,omg);
                 % Updating Omega to somewhat include remaining errors of the patch
-                % Q = denoise(omg,P);
-                Q = P;
+                Q = denoise(omg,P);
+                % Q = P;
                 
 
                 for kk=1:K
