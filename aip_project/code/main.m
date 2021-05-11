@@ -1,6 +1,6 @@
 %% Reading the video file (mp4)
 close all; clc; clear;
-vid = VideoReader('../data/mp4/akiyo.mp4');
+vid = VideoReader('../data/mp4/miss.mp4');
 
 N = 128;
 
@@ -20,7 +20,7 @@ I = I2;
 clear I2;
 
 
-%% Adding noise
+% Adding noise
 nFrames = size(I,4);
 noiseRate = 0.1;
 quantization_level_num = 10;
@@ -48,7 +48,7 @@ for i = 1:nFrames
     end
 end 
 
-%% Median Filter and Block Matching
+% Median Filter and Block Matching
 Img = I;
 clear I;
 dim = size(Img);
@@ -57,10 +57,10 @@ mb = 8;
 frameStep = 1;
 
 
-Reconstructed = zeros(size(Img),'uint8');
+Reconstructed = zeros(size(Img),'uint32');
 Scaling = Reconstructed;
 
-%% loop
+% loop
 for c=1:3
     
     I = reshape(Img(:,:,c,:), [dim(1),dim(2),dim(4)]); % Single channel image seq
@@ -91,15 +91,17 @@ for c=1:3
         % For each frame at frameSIze gap
 
         %%%%%% Block Matching %%%%%
-        Mappings = zeros([dim2(1),dim2(2),dim2(3),2]);
+        Mappings = zeros([dim2(1),dim2(2),dim2(3),2],'uint8');
         % Block Mapping of frame k with all the frame
         for kk=1:K
             if (kk==k)
                 continue
             end
+%             r = blockMatching(I(:,:,k),I(:,:,kk),mb);
             Mappings(:,:,kk,:) = blockMatching(I(:,:,k),I(:,:,kk),mb);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
 
         %%%%%% Denoise and Reconstruction %%%%%
         for i = 1:mb:N
@@ -117,14 +119,24 @@ for c=1:3
                     end
                     x = Mappings(i,j,kk,1);
                     y = Mappings(i,j,kk,2);
-                    % patch similar to i,j in kk_th framee
+                    % patch similar to i,j  in kk_th frame
                     P(:,kk) = reshape(I(x:x+(mb-1), y:y+(mb-1), kk), [mb*mb, 1]);
                     % Forming patch matrix
                     omg(:,kk) = reshape(Omega(x:x+(mb-1), y:y+(mb-1), kk), [mb*mb, 1]);
                     % Forming initial omega matrix using median filter errors
                 end
                 
-                omg = UpdateOmega(P,omg);
+%                 omg = UpdateOmega(P,omg);
+
+%                 thresh = 5;
+%                 omg2 = upOmega(P,thresh);
+% 
+%                 OMG = omg & omg2;
+%                 omg = OMG;
+%                 clear OMG;
+%                 imshow(omg, 'InitialMagnification', 3000); pause;
+                
+                
                 % Updating Omega to somewhat include remaining errors of the patch
                 Q = denoise(omg,P);
 %                 Q = P;
@@ -133,26 +145,36 @@ for c=1:3
 
                 for kk=1:K
                     if(kk==k)
-                        Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) = Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) + uint8(reshape(Q(:,kk),[mb, mb]));
+                        Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) = Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) + uint32(reshape(Q(:,kk),[mb, mb]));
                         Scaling(i:i+(mb-1), j:j+(mb-1), c, k) = Scaling(i:i+(mb-1), j:j+(mb-1), c, k) + 1;
                         continue
                     end
-                        x = Mappings(i,j,kk,1);
-                        y = Mappings(i,j,kk,2);
-                        Reconstructed(x:x+(mb-1), y:y+(mb-1), c, kk) = Reconstructed(x:x+(mb-1), y:y+(mb-1), c, kk) + uint8(reshape(Q(:,kk),[mb, mb]));
-                        Scaling(x:x+(mb-1), y:y+(mb-1), c, k) = Scaling(x:x+(mb-1), y:y+(mb-1), c, k) + 1;
+                    x = Mappings(i,j,kk,1);
+                    y = Mappings(i,j,kk,2);
+                    Reconstructed(x:x+(mb-1), y:y+(mb-1), c, kk) = Reconstructed(x:x+(mb-1), y:y+(mb-1), c, kk) + uint32(reshape(Q(:,kk),[mb, mb]));
+                    Scaling(x:x+(mb-1), y:y+(mb-1), c, kk) = Scaling(x:x+(mb-1), y:y+(mb-1), c, kk) + 1;
+                    
+%                     x = i;
+%                     y = j;
+%                     Reconstructed(x:x+(mb-1), y:y+(mb-1), c, k) = Reconstructed(x:x+(mb-1), y:y+(mb-1), c, k) + uint32(reshape(Q(:,kk),[mb, mb]));
+%                     Scaling(x:x+(mb-1), y:y+(mb-1), c, k) = Scaling(x:x+(mb-1), y:y+(mb-1), c, k) + 1;
                 end
             end
         end
-        
     end
 end
-
 Reconstructed = Reconstructed./Scaling;
-save("akiyo.mat");
+save("miss.mat");
 %% imshow
 
-frame = 1;
-imshowpair(Img(:,:,:,frame), uint8(Reconstructed(:,:,:,frame)),'montage');
 
+for f = 1:nFrames
+    frame = f;
+    subplot(1,2,1);
+    imshow(Img(:,:,:,frame),'InitialMagnification',500);
+    subplot(1,2,2);
+    imshow(uint8(Reconstructed(:,:,:,frame)),'InitialMagnification',500);
+    pause();
+end
 
+close all;

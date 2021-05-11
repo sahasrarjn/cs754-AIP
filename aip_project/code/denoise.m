@@ -5,20 +5,29 @@ function Q=denoise(omega, P)
     [n1, n2] = size(P);
     Q=zeros(n1,n2);
     
-    p=sum(omega,'all')/(n1*n2);
+    omega = uint32(omega);
+    P = uint32(P);
+    p=uint32(sum(omega,'all'))/uint32(n1*n2);
     
-    M=omega.*P;
-    M=M-sum(M,2)./sum(omega,2);
+    M=uint32(omega.*P);
+    M=M-uint32(sum(M,2)./sum(omega,2));
     M=M.^2;
     M=omega.*M;
+%     M
+%     imshow(M,[]);
+%     pause();
+    
     v=sqrt(mean(sum(M,2)./sum(omega,2)));
     
-    mu=(sqrt(n1)+sqrt(n2))*sqrt(p)*v;
+    mu=(sqrt(n1)+sqrt(n2))*sqrt(double(p))*v;
     
     tau=1.5;
-    epsilon=1e-3;
+    epsilon=1e-5;
+    Q = double(Q);
+    P = double(P);
+    omega = double(omega);
     
-    for i=1:5
+    for i=1:50
         R = Q - tau*omega.*(Q-P);
         [U,D,V] = svd(R);
         D = max(D-tau*mu,0);
@@ -29,4 +38,5 @@ function Q=denoise(omega, P)
         end
         Q = Temp;
     end
+    Q = uint32(Q);
 end
