@@ -69,13 +69,17 @@ for c=1:3
     Omega = zeros(dim2,'double');
     
     % Median Filter  
+    thresh = 20;
     tic
     for k = 1:K
         [a, b] = AdaptiveMedianFilter(I(:,:,k)); % Adaptive Median filter
         I2(:,:,k) = b;
         Omega(:,:,k) = a;
+        Omega2(:,:,k) = upOmega(I(:,:,k), thresh, Omega(:,:,k));
     end
     toc
+    
+    Omega = Omega2;
     
     
     clear I;
@@ -126,18 +130,9 @@ for c=1:3
                     % Forming initial omega matrix using median filter errors
                 end
                 
-%                 omg = UpdateOmega(P,omg);
-
-%                 thresh = 5;
-%                 omg2 = upOmega(P,thresh);
-% 
-%                 OMG = omg & omg2;
-%                 omg = OMG;
-%                 clear OMG;
-%                 imshow(omg, 'InitialMagnification', 3000); pause;
+%                 omg = UpdateOmega(P,omg);                
                 
                 
-                % Updating Omega to somewhat include remaining errors of the patch
                 Q = denoise(omg,P);
 %                 Q = P;
 
