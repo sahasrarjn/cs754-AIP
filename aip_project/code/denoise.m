@@ -1,3 +1,5 @@
+% Fixed point iteration for solving the minimization 
+
 
 function Q=denoise(omega, P)
     %optimization : min (Q) 1/2||Q|omega - P|omega||^2_F + mu ||Q||_*

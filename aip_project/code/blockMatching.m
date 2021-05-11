@@ -1,10 +1,16 @@
-function mapping = blockMatching(I1, I2, mb)
-	% mb: size of block
-    mb = uint8(mb);
+% Ref:
+% New Technique of Three Step Search Algorithm used for Motion Estimation in Video Compression
+% Mr. Rahul Bhandari, Mr. Ashutosh Vyas
 
+
+function mapping = blockMatching(I1, I2, mb)
+	% mb: size of stride
 	% mapping(x,y) will return x',y' of the similar patch in I2
 	% (x,y) in I1 and (x',y') in I2 are similar
-    
+
+
+    mb = uint8(mb);
+
 	[row, col] = size(I2);
     mapping = uint8(zeros(row,col,2));
     
@@ -15,7 +21,6 @@ function mapping = blockMatching(I1, I2, mb)
                 mapping(i,j,1) = uint8((j-1 - mod(j-1,mb)) + 1);
 
             end
-    %         [i, (i-1 - mod(i-1,mb)) + 1]
         end
     end
 
@@ -24,17 +29,6 @@ function mapping = blockMatching(I1, I2, mb)
 		printf("Invalid mb value")
 		return 
     end
-    
-%     for i=1:row
-%         for j=1:col
-%             mapping(i,j,1) = uint8((i-1 - mod(i-1,mb)) + 1);
-%             mapping(i,j,1) = uint8((j-1 - mod(j-1,mb)) + 1);
-%             
-%         end
-% %         [i, (i-1 - mod(i-1,mb)) + 1]
-%     end
-%     imshow(mapping(:,:,1));
-%     pause();
 	
 
 	pos = [0 -1 0 1 0; -1 0 0 0 1];
@@ -45,8 +39,6 @@ function mapping = blockMatching(I1, I2, mb)
 
 			S = 2*mb-1; % step size
 
-			% ox = size(I1,1)/2;
-			% oy = size(I1,2)/2;
 			ox = i;
 			oy = j;
 
@@ -107,15 +99,6 @@ function mapping = blockMatching(I1, I2, mb)
 					mapping(ii,jj,2) = uint8((minY-1 - mod(minY-1,mb)) + 1);
                 end
             end
-
-%             x = mapping(1,1,1);
-%             y = mapping(1,1,2);
-%             [x,y]
-%             figure();
-%             imshow(I1(1:8,1:8),'InitialMagnification',1000);
-%             figure();
-%             imshow(I2(x:x+7, y:y+7),'InitialMagnification',1000);
-%             pause();
 		end
 	end 
 end

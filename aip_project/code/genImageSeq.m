@@ -1,3 +1,5 @@
+%% Generate image seqeunce from the reconsruction
+
 clear; clc; close all;
 name = "miss";
 file = sprintf('%s.mat',name);
