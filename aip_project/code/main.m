@@ -1,10 +1,11 @@
 %% Reading the video file (mp4)
 close all; clc; clear;
-vid = VideoReader('../data/mp4/miss.mp4');
+name = "miss";
+str = sprintf('../data/mp4/%s.mp4',name);
+vid = VideoReader(str);
 
-N = 128;
+N = 240;
 
-%I = uint8(zeros([vid.Height, vid.Width, 3, vid.NumFrames]));
 I = uint8(zeros([N, N, 3, vid.NumFrames]));
 
 i=1;
@@ -13,14 +14,14 @@ while hasFrame(vid)
     I(:,:,:,i) = imresize(Temp, [N,N]);
     i = i+1;
 end
-numFrames= 5; % for testing
+numFrames = 20; % for testing
 I2 = I(:,:,:,1:numFrames);
 clear I;
 I = I2;
 clear I2;
 
 
-% Adding noise
+%% Adding noise
 nFrames = size(I,4);
 noiseRate = 0.1;
 quantization_level_num = 10;
@@ -48,7 +49,7 @@ for i = 1:nFrames
     end
 end 
 
-% Median Filter and Block Matching
+%% Median Filter and Block Matching
 Img = I;
 clear I;
 dim = size(Img);
@@ -60,7 +61,7 @@ frameStep = 1;
 Reconstructed = zeros(size(Img),'uint32');
 Scaling = Reconstructed;
 
-% loop
+%% Main loop
 for c=1:3
     
     I = reshape(Img(:,:,c,:), [dim(1),dim(2),dim(4)]); % Single channel image seq
@@ -90,7 +91,7 @@ for c=1:3
 
     dim2 = size(I);
     for k = 1:frameStep:K % check
-        k
+        k %NOPS
         % for k = 1:1 
         % For each frame at frameSIze gap
 
@@ -101,7 +102,6 @@ for c=1:3
             if (kk==k)
                 continue
             end
-%             r = blockMatching(I(:,:,k),I(:,:,kk),mb);
             Mappings(:,:,kk,:) = blockMatching(I(:,:,k),I(:,:,kk),mb);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -110,7 +110,6 @@ for c=1:3
         %%%%%% Denoise and Reconstruction %%%%%
         for i = 1:mb:N
             for j = 1:mb:N
-%                 [i,j]
                 P = zeros(mb*mb,K);
                 omg = P;
                 for kk=1:K
@@ -129,15 +128,11 @@ for c=1:3
                     omg(:,kk) = reshape(Omega(x:x+(mb-1), y:y+(mb-1), kk), [mb*mb, 1]);
                     % Forming initial omega matrix using median filter errors
                 end
-                
-%                 omg = UpdateOmega(P,omg);                
-                
-                
-                Q = denoise(omg,P);
-%                 Q = P;
+               
+                Q = denoise(omg,P); % Fixed point iteration for solving the minimization
 
                 
-
+                % Generating the denoised image from patches
                 for kk=1:K
                     if(kk==k)
                         Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) = Reconstructed(i:i+(mb-1), j:j+(mb-1), c, k) + uint32(reshape(Q(:,kk),[mb, mb]));
@@ -148,28 +143,28 @@ for c=1:3
                     y = Mappings(i,j,kk,2);
                     Reconstructed(x:x+(mb-1), y:y+(mb-1), c, kk) = Reconstructed(x:x+(mb-1), y:y+(mb-1), c, kk) + uint32(reshape(Q(:,kk),[mb, mb]));
                     Scaling(x:x+(mb-1), y:y+(mb-1), c, kk) = Scaling(x:x+(mb-1), y:y+(mb-1), c, kk) + 1;
-                    
-%                     x = i;
-%                     y = j;
-%                     Reconstructed(x:x+(mb-1), y:y+(mb-1), c, k) = Reconstructed(x:x+(mb-1), y:y+(mb-1), c, k) + uint32(reshape(Q(:,kk),[mb, mb]));
-%                     Scaling(x:x+(mb-1), y:y+(mb-1), c, k) = Scaling(x:x+(mb-1), y:y+(mb-1), c, k) + 1;
                 end
             end
         end
     end
 end
 Reconstructed = Reconstructed./Scaling;
-save("miss.mat");
-%% imshow
 
+str = sprintf('%s.mat',name);
+save(str);
 
+fprintf("done");
+
+%% Get frames
 for f = 1:nFrames
     frame = f;
     subplot(1,2,1);
-    imshow(Img(:,:,:,frame),'InitialMagnification',500);
+    imshow(Img(:,:,:,frame));
     subplot(1,2,2);
-    imshow(uint8(Reconstructed(:,:,:,frame)),'InitialMagnification',500);
-    pause();
+    imshow(uint8(Reconstructed(:,:,:,frame)));
+    pause(1);
+%     str = sprintf('images/%s/%s_%d.png',name,name,f);
+%     saveas(gcf, str, 'png');
 end
 
 close all;
