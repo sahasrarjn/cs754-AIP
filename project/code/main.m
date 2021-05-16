@@ -14,7 +14,7 @@ while hasFrame(vid)
     I(:,:,:,i) = imresize(Temp, [N,N]);
     i = i+1;
 end
-numFrames = 20; % for testing
+numFrames = 3; % for testing
 I2 = I(:,:,:,1:numFrames);
 clear I;
 I = I2;
@@ -52,9 +52,9 @@ end
 %% Median Filter and Block Matching
 Img = I;
 clear I;
-dim = size(Img);
+dim = size(Img);    
 K = dim(4);
-mb = 8;
+mb = 4;
 frameStep = 1;
 
 
@@ -90,6 +90,7 @@ for c=1:3
     % vec = zeros(N,N,K-1,2);
 
     dim2 = size(I);
+    stride = 2;
     for k = 1:frameStep:K % check
         k %NOPS
         % for k = 1:1 
@@ -102,7 +103,7 @@ for c=1:3
             if (kk==k)
                 continue
             end
-            Mappings(:,:,kk,:) = blockMatching(I(:,:,k),I(:,:,kk),mb);
+            Mappings(:,:,kk,:) = blockMatching(I(:,:,k),I(:,:,kk),mb,stride);
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%
         

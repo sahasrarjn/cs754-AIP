@@ -3,7 +3,7 @@
 % Mr. Rahul Bhandari, Mr. Ashutosh Vyas
 
 
-function mapping = blockMatching(I1, I2, mb)
+function mapping = blockMatching(I1, I2, mb, stride)
 	% mb: size of stride
 	% mapping(x,y) will return x',y' of the similar patch in I2
 	% (x,y) in I1 and (x',y') in I2 are similar
